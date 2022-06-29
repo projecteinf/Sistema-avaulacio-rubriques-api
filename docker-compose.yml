@@ -1,0 +1,37 @@
+version: "3"
+
+services:
+
+  server:
+    container_name: settings_server
+    image: nginx:1.15
+    ports:
+      - "8080:80"
+    volumes:
+      - ./docker/server/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - .:/var/www/html
+   depends_on:
+      - api
+
+  api:
+    container_name: settings_api
+    build:
+      context: .
+      dockerfile: docker/api/Dockerfile
+    ports:
+      - "9000:9000"
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - data
+
+  data:
+    container_name: settings_data
+    image: mongo:3.4
+    environment:
+      - MONGO_INITDB_DATABASE=settings
+      - MONGO_INITDB_ROOT_USERNAME=api_platform
+      - MONGO_INITDB_ROOT_PASSWORD=123456
+    ports:
+      - "27017:27017"
+
