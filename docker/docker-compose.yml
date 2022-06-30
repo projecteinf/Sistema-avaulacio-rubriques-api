@@ -1,5 +1,4 @@
 version: "1.0"
-
 services:
   web:
     image: nginx:latest
@@ -8,4 +7,9 @@ services:
     volumes:
       - ../api:/wapi
       - ./server/nginx/site.conf:/etc/nginx/conf.d/site.conf
+    links:
+      - php
+  php:
+    image: php:7-fpm
+
       
