@@ -18,15 +18,16 @@ services:
       - code-network
   mongo:
     image: mongo:4.2
+    restart: always
+    command: --auth
+    environment:
+      MONGO_INITDB_DATABASE: rubrica
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: a
     ports:
       - "27017:27017"
-
     volumes:
       - ../../mongodata:/data/db  
-    environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: root
-      ME_CONFIG_MONGODB_ADMINPASSWORD: a
-      ME_CONFIG_MONGODB_URL: mongodb://root:a@mongo:27017/
 
 networks:
     code-network:
