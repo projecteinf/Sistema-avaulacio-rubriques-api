@@ -1,15 +1,9 @@
 db.auth('root', 'a')
 
-db = db.getSiblingDB('rubrica')
+db = db.getSiblingDB('test-database')
 
 db.createUser({
-  user: "professor",
-  pwd: "p",
+  user: "theabnermatheus",
+  pwd: "teste",
   roles: [{role: "readWrite", db: "rubrica"}]
-});
-
-db.createUser({
-    user: "alumne",
-    pwd: "a",
-    roles: [{role: "read", db: "rubrica"}]
 });
