@@ -5,12 +5,12 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - ../api:/var/www/html/
+      - ../api:/usr/share/nginx/html/
       - ./server/nginx/site.conf:/etc/nginx/conf.d/site.conf
     links:
       - php
   php:
     image: php:7-fpm
     volumes:
-        - ../api:/var/www/html/
+        - ../api:/usr/share/nginx/html/
       
