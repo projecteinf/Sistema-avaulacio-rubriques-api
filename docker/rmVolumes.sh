@@ -5,3 +5,5 @@ echo "Eliminació contenidors"
 sudo docker rm -f $(sudo docker ps -a -q)
 echo "Eliminació volums"
 sudo docker volume rm $(sudo docker volume ls -q)
+echo "Eliminació carpeta. Directori actual $(pwd)" 
+sudo rm -rf ../../mongodata
