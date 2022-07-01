@@ -15,7 +15,9 @@ services:
     volumes:
       - ../api:/api
     networks:
-      - code-network  
+      - code-network
+  mongo:
+    image: mongo:latest
 
 networks:
     code-network:
