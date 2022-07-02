@@ -18,6 +18,6 @@ ENV LANGUAGE        en_US.UTF-8
 RUN pecl channel-update pecl.php.net
 RUN pecl install mongodb
 
-# RUN echo "extension=mongodb.so" > /etc/php/7.2/fpm/conf.d/20-mongodb.ini && \
+RUN echo "extension=mongodb.so" > /usr/local/etc/php/conf.d/php.ini
 #	echo "extension=mongodb.so" > /etc/php/7.2/cli/conf.d/20-mongodb.ini && \
 #	echo "extension=mongodb.so" > /etc/php/7.2/mods-available/mongodb.ini
