@@ -1,0 +1,2 @@
+Canviar a la carpeta docker
+sudo docker-compose up
