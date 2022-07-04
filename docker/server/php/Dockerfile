@@ -15,6 +15,8 @@ ENV LANGUAGE        en_US.UTF-8
 #    ln -s /usr/lib/x86_64-linux-gnu/libssl.a /usr/local/openssl/lib/libssl.a && \
 #    ln -s /usr/lib/x86_64-linux-gnu/libssl.so /usr/local/openssl/lib/
 
+RUN apt-get update && apt-get install -y git
+
 RUN pecl channel-update pecl.php.net
 RUN pecl install mongodb
 RUN curl -sS https://getcomposer.org/installer | php 
