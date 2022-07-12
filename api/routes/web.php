@@ -17,7 +17,6 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->get('/api/posts', [
-    'uses' => 'ExampleController@index',
-    'as' => 'list_posts'
+$router->get('/api/login', [
+    'uses' => 'LoginController@index'
 ]);
