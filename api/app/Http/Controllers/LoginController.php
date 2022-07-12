@@ -16,4 +16,16 @@ class LoginController extends Controller
         ];
 
     }
+
+    // Exemple crida: http://localhost:8080/index.php/api/login
+
+    public function  login(Request $request) {
+        return ['response' =>
+            [
+                'id' => 2,
+                'user' => 'login '.var_dump($request->input('clau')),
+                'password' => 'Password login'
+            ]
+        ];
+    }
 }

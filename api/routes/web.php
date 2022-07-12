@@ -14,17 +14,25 @@
 */
 
 
-
+// URL referència: auth0.com/blog/developing-restful-apis-with-lumen/
 
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
+$router->group(['prefix' => 'api'], function () use ($router) {
+    // api/login
+    $router->get('login', [ 'uses' => 'LoginController@index' ]);
+    $router->post('login', [ 'uses' => 'LoginController@login' ]);
+}
+);
+
+/* 
 $router->get('/api/login', [
     'uses' => 'LoginController@index'
 ]);
 
 $router->post('/api/login', [
     'uses' => 'LoginController@store'
-]);
+]); */
 
