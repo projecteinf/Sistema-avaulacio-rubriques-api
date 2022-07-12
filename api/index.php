@@ -1,14 +1,28 @@
-<?php 
-    require __DIR__ . "/controller/login/LoginController.php";
+<?php
 
-    $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-    var_dump($uri);
-    $uri = explode( '/', $uri );
+/*
+|--------------------------------------------------------------------------
+| Create The Application
+|--------------------------------------------------------------------------
+|
+| First we need to get an application instance. This creates an instance
+| of the application / container and bootstraps the application so it
+| is ready to receive HTTP / Console requests from the environment.
+|
+*/
 
-    var_dump(PHP_URL_PATH);
-    var_dump($uri);
-    $objFeedController = new LoginController();
-    $strMethodName = 'getDataAction';
-    var_dump($objFeedController->{$strMethodName}());
+$app = require __DIR__.'/bootstrap/app.php';
 
-?>
+/*
+|--------------------------------------------------------------------------
+| Run The Application
+|--------------------------------------------------------------------------
+|
+| Once we have the application, we can handle the incoming request
+| through the kernel, and send the associated response back to
+| the client's browser allowing them to enjoy the creative
+| and wonderful application we have prepared for them.
+|
+*/
+
+$app->run();

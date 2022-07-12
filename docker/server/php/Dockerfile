@@ -1,4 +1,4 @@
-FROM php:8.0-fpm
+FROM php:8.1-fpm
 
 ENV HOME /root
 ENV LC_ALL          C.UTF-8
