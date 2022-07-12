@@ -13,6 +13,9 @@
 |
 */
 
+
+
+
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
@@ -20,3 +23,8 @@ $router->get('/', function () use ($router) {
 $router->get('/api/login', [
     'uses' => 'LoginController@index'
 ]);
+
+$router->post('/api/login', [
+    'uses' => 'LoginController@store'
+]);
+
