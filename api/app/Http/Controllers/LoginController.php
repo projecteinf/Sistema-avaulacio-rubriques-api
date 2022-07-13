@@ -23,7 +23,7 @@ class LoginController extends Controller
         return ['response' =>
             [
                 'id' => 2,
-                'user' => 'login '.var_dump($request->input('clau')),
+                'user' => 'login '.var_dump($request->input('clau')), // recuperem camp clau del fitxer JSON. Cal modificar
                 'password' => 'Password login'
             ]
         ];
