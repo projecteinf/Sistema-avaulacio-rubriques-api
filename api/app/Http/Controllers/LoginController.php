@@ -56,12 +56,20 @@ class LoginController extends Controller
 
     public function  login(Request $request) {
         $this->cors();
-        return ['response' =>
+        /* return ['response' =>
             [
                 'id' => 2,
                 'user' => 'login ', //.var_dump($request->input('clau')), // recuperem camp clau del fitxer JSON. Cal modificar
                 'password' => 'Password login'
             ]
+        ]; */
+
+        $postdata = file_get_contents("php://input");
+        return ['response' =>
+            [
+                $postdata
+            ]
         ];
+           
     }
 }
