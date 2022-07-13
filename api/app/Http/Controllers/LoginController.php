@@ -17,7 +17,7 @@ class LoginController extends Controller
 
     }
 
-    // Exemple crida: http://localhost:8080/index.php/api/login
+    // Exemple crida: http://localhost:8080/api/login
 
     public function  login(Request $request) {
         return ['response' =>
