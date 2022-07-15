@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
+// require_once __DIR__."/../../model/Entities/implementacio/Login.php";
+
 class LoginController extends Controller
 {
 
@@ -54,13 +56,15 @@ class LoginController extends Controller
 
     // Exemple crida: http://localhost:8080/api/login
 
-    public function  login(Request $request) {
+    public function login(Request $request) {
         $this->cors();
 
-        $postdata = file_get_contents("php://input");   
+        $postdata = file_get_contents("php://input");
+        $login = json_decode($postdata,true);  
+
         return ['response' =>
             [
-                $postdata
+                $login
             ]
         ];
            

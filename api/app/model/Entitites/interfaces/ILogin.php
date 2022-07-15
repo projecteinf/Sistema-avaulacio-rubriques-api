@@ -1,6 +1,7 @@
 <?php
 interface ILogin {
-    public autentifficar();
+    function __construct($json);
+    public function  autentificar(): bool;
 }
 
 ?>
