@@ -5,12 +5,11 @@
         private string $name;
         private string $password;
 
-        function __construct($json) { 
-           // $this->$name = $json['Usuari'];
-           // $this->$password = $json['Password'];
+        function __construct() { 
+           echo "Creat login";
          }
 
-        public function  autentificar(): bool {
+        public function autentificar(): bool {
             return true;
         }
 

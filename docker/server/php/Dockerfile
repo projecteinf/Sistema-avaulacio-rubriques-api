@@ -17,6 +17,10 @@ ENV LANGUAGE        en_US.UTF-8
 
 RUN apt-get update && apt-get install -y git
 
+RUN pecl install xdebug \
+    && docker-php-ext-enable xdebug
+
+
 RUN pecl channel-update pecl.php.net
 RUN pecl install mongodb
 RUN curl -sS https://getcomposer.org/installer | php 

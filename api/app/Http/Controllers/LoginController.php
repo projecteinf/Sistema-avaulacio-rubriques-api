@@ -9,14 +9,7 @@ class LoginController extends Controller
 {
 
     private function cors() {
-    
-        // header('Access-Control-Allow-Origin: ' . $_SERVER['HTTP_ORIGIN']);
-        // header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
-        // header('Access-Control-Max-Age: 1000');
         
-        
-        
-
         // Allow from any origin
         if (isset($_SERVER['HTTP_ORIGIN'])) {
             // Decide if the origin in $_SERVER['HTTP_ORIGIN'] is one
@@ -60,11 +53,13 @@ class LoginController extends Controller
         $this->cors();
 
         $postdata = file_get_contents("php://input");
-        $login = json_decode($postdata,true);  
+        //$login = new Login();
+        $login = json_decode($postdata,true); 
+         
 
         return ['response' =>
             [
-                $login
+                __DIR__."/Login.php"
             ]
         ];
            
