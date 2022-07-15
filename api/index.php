@@ -27,4 +27,5 @@ $app = require __DIR__.'/bootstrap/app.php';
 
 $_ENV["APP_ROOT"]=__DIR__;
 
+
 $app->run();

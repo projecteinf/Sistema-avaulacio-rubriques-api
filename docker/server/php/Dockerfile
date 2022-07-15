@@ -31,5 +31,6 @@ RUN echo "extension=mongodb.so" >> /usr/local/etc/php/php.ini-production
 RUN echo "extension=mongodb.so" >> /usr/local/etc/php/php.ini-development
 RUN echo "extension=mongodb.so" >> /usr/local/etc/php/conf.d/docker-php-ext-sodium.ini 
 
+
 #	echo "extension=mongodb.so" > /etc/php/7.2/cli/conf.d/20-mongodb.ini && \
 #	echo "extension=mongodb.so" > /etc/php/7.2/mods-available/mongodb.ini

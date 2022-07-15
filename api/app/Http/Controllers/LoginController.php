@@ -54,14 +54,12 @@ class LoginController extends Controller
 
     public function login(Request $request) {
         $this->cors();
-
+        
         $postdata = file_get_contents("php://input");
         $login = new Login();
         
 
         // $login = json_decode($postdata,false); 
-         
-        
         //$login->autentificar();
 
         return ['response' =>
