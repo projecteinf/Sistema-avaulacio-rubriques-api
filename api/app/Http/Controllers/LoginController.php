@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
-// require_once __DIR__."/../../model/Entities/implementacio/Login.php";
+// require_once "/api/app/model/Entities/implementacio/Login.php";
+require_once $_ENV["APP_ROOT"]."/app/model/Entities/implementacio/Login.php";
+
+
 
 class LoginController extends Controller
 {
@@ -53,13 +56,17 @@ class LoginController extends Controller
         $this->cors();
 
         $postdata = file_get_contents("php://input");
-        //$login = new Login();
-        $login = json_decode($postdata,true); 
+        $login = new Login();
+        
+
+        // $login = json_decode($postdata,false); 
          
+        
+        //$login->autentificar();
 
         return ['response' =>
             [
-                __DIR__."/Login.php"
+                json_decode($postdata,false)->id  
             ]
         ];
            
