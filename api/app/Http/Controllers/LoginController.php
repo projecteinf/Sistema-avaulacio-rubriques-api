@@ -53,12 +53,14 @@ class LoginController extends Controller
     // Exemple crida: http://localhost:8080/api/login
 
     public function login(Request $request) {
-        ini_set("display_errors", 1);
+        /* ini_set("display_errors", 1);
         ini_set("track_errors", 1);
         ini_set("html_errors", 1);
-        error_reporting(E_ALL);
-        
+        error_reporting(E_ALL); */
+
         $this->cors();
+        
+        MongoDb::connectar();
         
         $postdata = file_get_contents("php://input");
         $login = new Login();
