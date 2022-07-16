@@ -6,16 +6,13 @@ use Illuminate\Http\Request;
 // require_once "/api/app/model/Entities/implementacio/Login.php";
 require_once $_ENV["APP_ROOT"]."/app/model/Entities/implementacio/Login.php";
 
-// require_once $_ENV["APP_ROOT"]."/app/model/Entities/interfaces/ILogin.php";
 
 
 class LoginController extends Controller
 {
 
     private function cors() {
-        ini_set('display_errors',1);
-        ini_set('display_startup_errors',1);
-        error_reporting(E_ALL);
+        
         // Allow from any origin
         if (isset($_SERVER['HTTP_ORIGIN'])) {
             // Decide if the origin in $_SERVER['HTTP_ORIGIN'] is one
@@ -56,6 +53,11 @@ class LoginController extends Controller
     // Exemple crida: http://localhost:8080/api/login
 
     public function login(Request $request) {
+        ini_set("display_errors", 1);
+        ini_set("track_errors", 1);
+        ini_set("html_errors", 1);
+        error_reporting(E_ALL);
+        
         $this->cors();
         
         $postdata = file_get_contents("php://input");

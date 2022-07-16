@@ -1,7 +1,9 @@
 <?php
-    // require_once $_ENV["APP_ROOT"]."/app/model/Entities/interfaces/ILogin.php";
+   namespace App\Http\Controllers;
 
-    class Login { //implements ILogin {
+   require_once $_ENV["APP_ROOT"]."/app/model/Entities/interfaces/ILogin.php";
+
+    class Login implements ILogin {
         private string $name;
         private string $password;
 
