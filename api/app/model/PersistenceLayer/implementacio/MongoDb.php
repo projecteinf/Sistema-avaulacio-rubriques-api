@@ -1,5 +1,5 @@
 <?php
-    require_once $_ENV["APP_ROOT"]."/app/model/PersistenceLayer/interfaces/IConnexio.php";
+    require_once __DIR__."/../interfaces/IConnexio.php";
     class MongoDb implements IConnexio {
         public static $connexio;
         public static function connectar() {

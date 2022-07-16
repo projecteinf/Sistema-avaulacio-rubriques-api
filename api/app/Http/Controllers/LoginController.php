@@ -13,7 +13,9 @@ class LoginController extends Controller
 {
 
     private function cors() {
-        
+        ini_set('display_errors',1);
+        ini_set('display_startup_errors',1);
+        error_reporting(E_ALL);
         // Allow from any origin
         if (isset($_SERVER['HTTP_ORIGIN'])) {
             // Decide if the origin in $_SERVER['HTTP_ORIGIN'] is one

@@ -1,5 +1,5 @@
-FROM nanoninja/php-fpm
-#FROM php:8.1-fpm
+FROM devilbox/php-fpm-8.2
+# FROM php:8.1-fpm
 
 ENV HOME /root
 ENV LC_ALL          C.UTF-8
@@ -17,9 +17,10 @@ ENV LANGUAGE        en_US.UTF-8
 #    ln -s /usr/lib/x86_64-linux-gnu/libssl.so /usr/local/openssl/lib/
 
 RUN apt-get update && apt-get install -y git
-
-RUN pecl install xdebug \
-    && docker-php-ext-enable xdebug
+RUN mkdir /usr/local/logs
+RUN touch /usr/local/logs/php.log
+# RUN pecl install xdebug \
+#    && docker-php-ext-enable xdebug
 
 
 RUN pecl channel-update pecl.php.net
@@ -30,11 +31,11 @@ RUN composer require mongodb/mongodb --ignore-platform-reqs
 
 
 
-RUN echo "display_errors = On" >> /usr/local/etc/php/php.ini-development
-RUN echo "error_reporting = E_ALL & ~E_NOTICE" >> /usr/local/etc/php.ini-development
-RUN echo "extension=mongodb.so" >> /usr/local/etc/php/php.ini-development
+# RUN echo "display_errors = On" >> /usr/local/etc/php/php.ini-development
+# RUN echo "error_reporting = E_ALL & ~E_NOTICE" >> /usr/local/etc/php.ini-development
+# RUN echo "extension=mongodb.so" >> /usr/local/etc/php/php.ini-development
 
-RUN cat /usr/local/etc/php.ini-development > /usr/local/etc/php/php.ini-production
+# RUN cat /usr/local/etc/php.ini-development > /usr/local/etc/php/php.ini-production
 
 RUN echo "extension=mongodb.so" >> /usr/local/etc/php/conf.d/docker-php-ext-sodium.ini 
 
