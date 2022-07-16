@@ -17,6 +17,9 @@ services:
       dockerfile: ./server/php/Dockerfile
     volumes:
       - ../api:/api
+      - ./server/php/conf.d/www.conf:/usr/local/etc/php-fpm.d/www.conf
+      - ./server/php/conf.d/log.conf:/usr/local/etc/php-fpm.d/zz-log.conf
+      - ./server/php/conf.d/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
     networks:
       - code-network
 

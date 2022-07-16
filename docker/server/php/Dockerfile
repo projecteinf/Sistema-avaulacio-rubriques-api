@@ -27,9 +27,16 @@ RUN curl -sS https://getcomposer.org/installer | php
 RUN mv composer.phar /usr/bin/composer
 RUN composer require mongodb/mongodb --ignore-platform-reqs
 
-RUN echo "extension=mongodb.so" >> /usr/local/etc/php/php.ini-production
+
+
+RUN echo "display_errors = On" >> /usr/local/etc/php/php.ini-development
+RUN echo "error_reporting = E_ALL & ~E_NOTICE" >> /usr/local/etc/php.ini-development
 RUN echo "extension=mongodb.so" >> /usr/local/etc/php/php.ini-development
+
+RUN cat /usr/local/etc/php.ini-development > /usr/local/etc/php/php.ini-production
+
 RUN echo "extension=mongodb.so" >> /usr/local/etc/php/conf.d/docker-php-ext-sodium.ini 
+
 
 
 #	echo "extension=mongodb.so" > /etc/php/7.2/cli/conf.d/20-mongodb.ini && \
