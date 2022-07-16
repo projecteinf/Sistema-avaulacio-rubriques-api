@@ -1,4 +1,5 @@
-FROM php:8.1-fpm
+FROM nanoninja/php-fpm
+#FROM php:8.1-fpm
 
 ENV HOME /root
 ENV LC_ALL          C.UTF-8
