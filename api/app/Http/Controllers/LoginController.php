@@ -5,7 +5,7 @@ use Illuminate\Http\Request;
 
 // require_once "/api/app/model/Entities/implementacio/Login.php";
 require_once $_ENV["APP_ROOT"]."/app/model/Entities/implementacio/Login.php";
-
+require_once $_ENV["APP_ROOT"]."/app/model/PersistenceLayer/implementacio/MongoDb.php";
 
 
 class LoginController extends Controller
