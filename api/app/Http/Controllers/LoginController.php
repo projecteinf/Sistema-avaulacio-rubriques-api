@@ -64,17 +64,14 @@ class LoginController extends Controller
     public function login(Request $request) {
 
         $this->cors();
-        
-        
-        
         $postdata = file_get_contents("php://input");
         
         $this->inicialitzarLogin(json_decode($postdata,false));
         
         return ['response' =>
             [
-                //$this->login->autentificar()
-                $this->login->toString()
+                $this->login->autentificar()
+                //$this->login->toString()
             ]
         ];
            
