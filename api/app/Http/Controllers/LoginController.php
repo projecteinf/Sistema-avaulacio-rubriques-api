@@ -10,7 +10,6 @@ use MongoDb;
 
 class LoginController extends Controller
 {
-
     private function cors() {
         
         // Allow from any origin
@@ -36,8 +35,6 @@ class LoginController extends Controller
         }
     }
     
-    
-
     public function index() {
         $this->cors();
         return ['response' =>
@@ -51,27 +48,23 @@ class LoginController extends Controller
     }
 
     // Exemple crida: http://localhost:8080/api/login
-
     public function login(Request $request) {
-        /* ini_set("display_errors", 1);
-        ini_set("track_errors", 1);
-        ini_set("html_errors", 1);
-        error_reporting(E_ALL); */
 
         $this->cors();
         
-        MongoDb::connectar();
+        $con = new MongoDb();
         
         $postdata = file_get_contents("php://input");
         $login = new Login();
-        
+        $login->inicialitzar(json_decode($postdata,false));
 
-        // $login = json_decode($postdata,false); 
+        // //json_decode($postdata,false)->id
         //$login->autentificar();
 
         return ['response' =>
             [
-                json_decode($postdata,false)->id  
+                //$login->autentificar()
+                $login->toString()
             ]
         ];
            

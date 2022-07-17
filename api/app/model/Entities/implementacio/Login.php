@@ -9,7 +9,7 @@
 
 
         public function inicialitzar($data) {
-           // foreach ($data as $key => $value) $this->{$key} = $value;
+           foreach ($data as $key => $value) $this->{$key} = $value;
 
         }
 
@@ -17,5 +17,9 @@
             return true;
         }
 
-        
+        public function toString() {
+            $dada="/";
+            foreach ($this as $key => $value) $dada .= "$key: $value /";
+            return $dada;
+        }
     }
