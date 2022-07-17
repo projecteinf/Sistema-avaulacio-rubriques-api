@@ -10,6 +10,8 @@ use MongoDb;
 
 class LoginController extends Controller
 {
+    private Login $login;
+
     private function cors() {
         
         // Allow from any origin
@@ -34,7 +36,13 @@ class LoginController extends Controller
             exit(0);
         }
     }
-    
+
+    private function inicialitzarLogin($dada) {
+        $this->login->setName($dada->usuari);
+        $this->login->setPassword($dada->password);
+    }
+
+
     public function index() {
         $this->cors();
         return ['response' =>
@@ -55,18 +63,17 @@ class LoginController extends Controller
         $con = new MongoDb();
         
         $postdata = file_get_contents("php://input");
-        $login = new Login();
-        $login->inicialitzar(json_decode($postdata,false));
-
-        // //json_decode($postdata,false)->id
-        //$login->autentificar();
-
+        $this->login = new Login();
+        $this->inicialitzarLogin(json_decode($postdata,false));
+        
         return ['response' =>
             [
-                //$login->autentificar()
-                $login->toString()
+                //$this->login->autentificar()
+                $this->login->toString()
             ]
         ];
            
     }
+
+    
 }
