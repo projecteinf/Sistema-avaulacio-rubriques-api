@@ -11,6 +11,7 @@ use MongoDb;
 class LoginController extends Controller
 {
     private Login $login;
+    private MongoDb $con;
 
     private function cors() {
         
@@ -42,6 +43,10 @@ class LoginController extends Controller
         $this->login->setPassword($dada->password);
     }
 
+    public function __construct() {
+        $this->login = new Login();
+        $this->con = new MongoDb();
+    }
 
     public function index() {
         $this->cors();
@@ -60,10 +65,10 @@ class LoginController extends Controller
 
         $this->cors();
         
-        $con = new MongoDb();
+        
         
         $postdata = file_get_contents("php://input");
-        $this->login = new Login();
+        
         $this->inicialitzarLogin(json_decode($postdata,false));
         
         return ['response' =>
