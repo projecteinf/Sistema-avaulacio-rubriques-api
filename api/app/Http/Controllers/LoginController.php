@@ -70,7 +70,7 @@ class LoginController extends Controller
         
         return ['response' =>
             [
-                $this->login->autentificar()
+                $this->login->autentificar($con)
                 //$this->login->toString()
             ]
         ];
