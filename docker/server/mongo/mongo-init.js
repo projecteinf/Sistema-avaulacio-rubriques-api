@@ -1,15 +1,18 @@
 db.auth('root', 'a')
 
 // Creació usuaris de sistema per a la base de dades rubrica
-// db.createUser({
-//   user: "administrator",
-//   pwd: "a",
-//   roles: [{role: "clusterAdmin", db: "admin"}]
-// });
 
-db.addUser( { user: "approot",
-              pwd: "a",
-              roles: [ "userAdminAnyDatabase" ] } )
+db = db.getSiblingDB('rubrica');
+
+
+
+db.createUser({
+   user: "root",
+   pwd: "a",
+   roles:  [ "readWrite", "dbAdmin" ]
+ });
+
+
 
 
 db.createUser({

@@ -1,0 +1,109 @@
+Sending build context to Docker daemon  36.86kB
+Step 1/17 : FROM devilbox/php-fpm-8.2
+ ---> ad1d72d0ca52
+Step 2/17 : ENV HOME /root
+ ---> Using cache
+ ---> ae81a6ea726d
+Step 3/17 : ENV LC_ALL          C.UTF-8
+ ---> Using cache
+ ---> 802358a63e60
+Step 4/17 : ENV LANG            en_US.UTF-8
+ ---> Using cache
+ ---> e7b7effaa759
+Step 5/17 : ENV LANGUAGE        en_US.UTF-8
+ ---> Using cache
+ ---> e855cde37331
+Step 6/17 : RUN apt-get update && apt-get install -y libfreetype6-dev libjpeg62-turbo-dev libmcrypt-dev libpng-dev    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/    && docker-php-ext-install -j$(nproc) gd
+ ---> Using cache
+ ---> 3f164bcd5907
+Step 7/17 : RUN mkdir -p /usr/local/openssl/include/openssl/ &&   ln -s /usr/include/openssl/evp.h /usr/local/openssl/include/openssl/evp.h &&    mkdir -p /usr/local/openssl/lib/ &&    ln -s /usr/lib/x86_64-linux-gnu/libssl.a /usr/local/openssl/lib/libssl.a &&    ln -s /usr/lib/x86_64-linux-gnu/libssl.so /usr/local/openssl/lib/
+ ---> Using cache
+ ---> 3d5f570454b4
+Step 8/17 : RUN apt-get update && apt-get install -y git
+ ---> Using cache
+ ---> bec58ccc9268
+Step 9/17 : RUN mkdir /usr/local/logs
+ ---> Using cache
+ ---> d898c6a8621e
+Step 10/17 : RUN touch /usr/local/logs/php.log
+ ---> Using cache
+ ---> 1ee44b8ab2b9
+Step 11/17 : RUN apt-get install -y libcurl4-openssl-dev pkg-config libssl-dev -y
+ ---> Using cache
+ ---> 2d02b7fa2461
+Step 12/17 : RUN pecl channel-update pecl.php.net
+ ---> Using cache
+ ---> 40417db61091
+Step 13/17 : RUN pecl install mongodb
+ ---> Using cache
+ ---> 2e923534fa8d
+Step 14/17 : RUN curl -sS https://getcomposer.org/installer | php
+ ---> Using cache
+ ---> 2f72162a7526
+Step 15/17 : RUN mv composer.phar /usr/bin/composer
+ ---> Using cache
+ ---> 0b8952f90f5f
+Step 16/17 : RUN composer require mongodb/mongodb --ignore-platform-reqs
+ ---> Using cache
+ ---> 885d4549d088
+Step 17/17 : RUN echo "extension=mongodb.so" >> /usr/local/etc/php/php.ini
+ ---> Using cache
+ ---> 25735ca32f61
+Successfully built 25735ca32f61
+Successfully tagged docker_php:latest
+Attaching to docker_mongo_1, docker_web_1, docker_php_1
+[36mmongo_1  |[0m 
+[36mmongo_1  |[0m WARNING: MongoDB 5.0+ requires a CPU with AVX support, and your current system does not appear to have that!
+[36mmongo_1  |[0m   see https://jira.mongodb.org/browse/SERVER-54407
+[36mmongo_1  |[0m   see also https://www.mongodb.com/community/forums/t/mongodb-5-0-cpu-intel-g4650-compatibility/116610/2
+[36mmongo_1  |[0m   see also https://github.com/docker-library/mongo/issues/485#issuecomment-891991814
+[36mmongo_1  |[0m 
+[36mmongo_1  |[0m about to fork child process, waiting until server is ready for connections.
+[33mphp_1    |[0m [18-Jul-2022 19:37:03] NOTICE: fpm is running, pid 1
+[36mmongo_1  |[0m forked process: 30
+[33mphp_1    |[0m [18-Jul-2022 19:37:03] NOTICE: ready to handle connections
+[36mmongo_1  |[0m 2022-07-18T19:37:02.882+0000 I  CONTROL  [main] ***** SERVER RESTARTED *****
+[36mmongo_1  |[0m 2022-07-18T19:37:02.892+0000 I  CONTROL  [main] Automatically disabling TLS 1.0, to force-enable TLS 1.0 specify --sslDisabledProtocols 'none'
+[32mweb_1    |[0m /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+[32mweb_1    |[0m /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+[36mmongo_1  |[0m 2022-07-18T19:37:02.897+0000 W  ASIO     [main] No TransportLayer configured during NetworkInterface startup
+[36mmongo_1  |[0m 2022-07-18T19:37:02.898+0000 I  CONTROL  [initandlisten] MongoDB starting : pid=30 port=27017 dbpath=/data/db 64-bit host=7db3a36e8a11
+[36mmongo_1  |[0m 2022-07-18T19:37:02.898+0000 I  CONTROL  [initandlisten] db version v4.2.21
+[36mmongo_1  |[0m 2022-07-18T19:37:02.898+0000 I  CONTROL  [initandlisten] git version: b0aeed9445ff41af07449fa757e1f231bce990b3
+[36mmongo_1  |[0m 2022-07-18T19:37:02.898+0000 I  CONTROL  [initandlisten] OpenSSL version: OpenSSL 1.1.1  11 Sep 2018
+[36mmongo_1  |[0m 2022-07-18T19:37:02.898+0000 I  CONTROL  [initandlisten] allocator: tcmalloc
+[36mmongo_1  |[0m 2022-07-18T19:37:02.898+0000 I  CONTROL  [initandlisten] modules: none
+[36mmongo_1  |[0m 2022-07-18T19:37:02.898+0000 I  CONTROL  [initandlisten] build environment:
+[32mweb_1    |[0m /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+[36mmongo_1  |[0m 2022-07-18T19:37:02.899+0000 I  CONTROL  [initandlisten]     distmod: ubuntu1804
+[36mmongo_1  |[0m 2022-07-18T19:37:02.899+0000 I  CONTROL  [initandlisten]     distarch: x86_64
+[36mmongo_1  |[0m 2022-07-18T19:37:02.899+0000 I  CONTROL  [initandlisten]     target_arch: x86_64
+[36mmongo_1  |[0m 2022-07-18T19:37:02.899+0000 I  CONTROL  [initandlisten] options: { net: { bindIp: "127.0.0.1", port: 27017, tls: { mode: "disabled" } }, processManagement: { fork: true, pidFilePath: "/tmp/docker-entrypoint-temp-mongod.pid" }, systemLog: { destination: "file", logAppend: true, path: "/proc/1/fd/1" } }
+[36mmongo_1  |[0m 2022-07-18T19:37:03.022+0000 I  STORAGE  [initandlisten] 
+[36mmongo_1  |[0m 2022-07-18T19:37:03.023+0000 I  STORAGE  [initandlisten] ** WARNING: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine
+[36mmongo_1  |[0m 2022-07-18T19:37:03.023+0000 I  STORAGE  [initandlisten] **          See http://dochub.mongodb.org/core/prodnotes-filesystem
+[32mweb_1    |[0m 10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf
+[36mmongo_1  |[0m 2022-07-18T19:37:03.023+0000 I  STORAGE  [initandlisten] wiredtiger_open config: create,cache_size=7489M,cache_overflow=(file_max=0M),session_max=33000,eviction=(threads_min=4,threads_max=4),config_base=false,statistics=(fast),log=(enabled=true,archive=true,path=journal,compressor=snappy),file_manager=(close_idle_time=100000,close_scan_interval=10,close_handle_minimum=250),statistics_log=(wait=0),verbose=[recovery_progress,checkpoint_progress],
+[32mweb_1    |[0m 10-listen-on-ipv6-by-default.sh: info: /etc/nginx/conf.d/default.conf differs from the packaged version
+[32mweb_1    |[0m /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+[32mweb_1    |[0m /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
+[32mweb_1    |[0m /docker-entrypoint.sh: Configuration complete; ready for start up
+[32mweb_1    |[0m 2022/07/18 19:37:03 [notice] 1#1: using the "epoll" event method
+[32mweb_1    |[0m 2022/07/18 19:37:03 [notice] 1#1: nginx/1.23.0
+[32mweb_1    |[0m 2022/07/18 19:37:03 [notice] 1#1: built by gcc 10.2.1 20210110 (Debian 10.2.1-6) 
+[32mweb_1    |[0m 2022/07/18 19:37:03 [notice] 1#1: OS: Linux 5.15.0-40-generic
+[32mweb_1    |[0m 2022/07/18 19:37:03 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+[32mweb_1    |[0m 2022/07/18 19:37:03 [notice] 1#1: start worker processes
+[32mweb_1    |[0m 2022/07/18 19:37:03 [notice] 1#1: start worker process 30
+[32mweb_1    |[0m 2022/07/18 19:37:03 [notice] 1#1: start worker process 31
+[32mweb_1    |[0m 2022/07/18 19:37:03 [notice] 1#1: start worker process 32
+[32mweb_1    |[0m 2022/07/18 19:37:03 [notice] 1#1: start worker process 33
+[32mweb_1    |[0m 2022/07/18 19:37:03 [notice] 1#1: start worker process 34
+[32mweb_1    |[0m 2022/07/18 19:37:03 [notice] 1#1: start worker process 35
+[32mweb_1    |[0m 2022/07/18 19:37:03 [notice] 1#1: start worker process 36
+[32mweb_1    |[0m 2022/07/18 19:37:03 [notice] 1#1: start worker process 37
+[36mmongo_1  |[0m 2022-07-18T19:37:05.095+0000 I  STORAGE  [initandlisten] WiredTiger message [1658173025:95571][30:0x7ff7dba60b00], txn-recover: Set global recovery timestamp: (0, 0)
+[36mmongo_1  |[0m 2022-07-18T19:37:05.310+0000 I  RECOVERY [initandlisten] WiredTiger recoveryTimestamp. Ts: Timestamp(0, 0)
+[36mmongo_1  |[0m 2022-07-18T19:37:05.563+0000 I  STORAGE  [initandlisten] No table logging settings modifications are required for existing WiredTiger tables. Logging enabled? 1
+[36mmongo_1  |[0m 2022-07-18T19:37:05.564+0000 I  STORAGE  [initandlisten] Timestamp monitor starting
+Gracefully stopping... (press Ctrl+C again to force)
