@@ -17,17 +17,18 @@ ENV LANGUAGE        en_US.UTF-8
 #    ln -s /usr/lib/x86_64-linux-gnu/libssl.so /usr/local/openssl/lib/
 
 RUN apt-get update && apt-get install -y git
+RUN apt-get install php-mongodb -y
 RUN mkdir /usr/local/logs
 RUN touch /usr/local/logs/php.log
 # RUN pecl install xdebug \
 #    && docker-php-ext-enable xdebug
 
 
-RUN pecl channel-update pecl.php.net
-RUN pecl install mongodb
-RUN curl -sS https://getcomposer.org/installer | php 
-RUN mv composer.phar /usr/bin/composer
-RUN composer require mongodb/mongodb --ignore-platform-reqs
+# RUN pecl channel-update pecl.php.net
+# RUN pecl install mongodb
+# RUN curl -sS https://getcomposer.org/installer | php 
+# RUN mv composer.phar /usr/bin/composer
+# RUN composer require mongodb/mongodb --ignore-platform-reqs
 
 
 
@@ -37,7 +38,7 @@ RUN composer require mongodb/mongodb --ignore-platform-reqs
 
 # RUN cat /usr/local/etc/php.ini-development > /usr/local/etc/php/php.ini-production
 
-RUN echo "extension=mongodb.so" >> /usr/local/etc/php/conf.d/docker-php-ext-sodium.ini 
+# RUN echo "extension=mongodb.so" >> /usr/local/etc/php/conf.d/docker-php-ext-sodium.ini 
 
 
 
