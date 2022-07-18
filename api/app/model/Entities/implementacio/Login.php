@@ -10,9 +10,16 @@
         public function setName($name) { $this->name = $name;}
         public function setPassword($password) { $this->password = $password;}
 
-        public function  autentificar($con): bool {
-            $filter
-            $rows = $con->executeQuery($filter,$options);
+        public function  autentificar($con): string {
+            $filter = ['user'=>'acalvo'];
+            $options = [ 'projection' => ['_id' => 0 ]];
+            $query = new MongoDB\Driver\Query($filter,$options);
+            $rows = $con->executeQuery('rubrica.usuaris',$query);
+            $result = "";
+            foreach ($rows as $r) {
+                $result .= $r;
+            }
+            return $result;
         }
 
         public function toString() {
