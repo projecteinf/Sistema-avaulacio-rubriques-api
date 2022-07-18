@@ -10,7 +10,7 @@
             $query = new MongoDB\Driver\Query($filter,$options);
             $rows = $con->executeQuery('db.usuaris',$query);
             
-            var_dump($query);
+            var_dump($con);
         } catch (Excption $e) {
             echo "Error {$e->getMessage()}";
         }

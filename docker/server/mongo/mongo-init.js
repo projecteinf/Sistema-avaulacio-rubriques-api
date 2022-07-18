@@ -1,6 +1,12 @@
 db.auth('root', 'a')
 
-// Creació usuaris de sistema
+// Creació usuaris de sistema per a la base de dades rubrica
+db.createUser({
+  user: "root",
+  pwd: "a",
+  roles: [{role: "admin", db: "rubrica"}]
+});
+
 db.createUser({
   user: "professor",
   pwd: "p",
@@ -15,6 +21,9 @@ db.createUser({
 
 db = db.getSiblingDB('rubrica') 
 db.createCollection('usuaris')
+
+
+
 
 db.usuaris.insert({
   user: "acalvo",
