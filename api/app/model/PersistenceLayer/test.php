@@ -3,13 +3,15 @@
     // require_once __DIR__."/implementacio/MongoDb.php";
     
 
-    $con = new MongoDB\Driver\Manager("mongodb://root:a@127.0.0.1:27017/rubrica");
+    $con = new MongoDB\Driver\Manager("mongodb://root:a@docker_mongo_1:27017/rubrica");
     if($con) {
         try {
-            $bulk = new MongodDB\Driver\BulkWrite;
-            $bulk->insertOne(['nom' => 'TestUsuari']);
-            $con->executeBulkWrite('rutina.usuaris',$bulk);
-        } catch (Trowable $e) {
+            $filter = [];$options = [];
+            $query = new MongoDB\Driver\Query($filter,$options);
+            $rows = $con->executeQuery('db.usuaris',$query);
+            
+            var_dump($query);
+        } catch (Excption $e) {
             echo "Error {$e->getMessage()}";
         }
 
