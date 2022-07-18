@@ -3,7 +3,7 @@
     // require_once __DIR__."/implementacio/MongoDb.php";
     
 
-    $con = new MongoDB\Driver\Manager("mongodb://root:a@docker_mongo_1:27017/rubrica");
+    $con = new MongoDB\Driver\Manager("mongodb://admindb:a@docker_mongo_1:27017/rubrica");
     if($con) {
         try {
             $filter = [];$options = [];
