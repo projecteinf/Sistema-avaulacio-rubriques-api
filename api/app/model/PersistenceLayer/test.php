@@ -6,11 +6,13 @@
     $con = new MongoDB\Driver\Manager("mongodb://admin:password@docker_mongo_1:27017/admin");
     if($con) {
         try {
-            $filter = [];$options = [];
+            $filter = [];
+            $options = ['projection'=>['user' => 1,'password' => 1 ]];
             $query = new MongoDB\Driver\Query($filter,$options);
-            $rows = $con->executeQuery('db.usuaris',$query);
-            
-            var_dump($con);
+            $rows = $con->executeQuery('rubrica.usuaris',$query);
+            foreach ($rows as $row) {
+                var_dump($row);
+            }
         } catch (Excption $e) {
             echo "Error {$e->getMessage()}";
         }
