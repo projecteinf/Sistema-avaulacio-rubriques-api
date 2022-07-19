@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
-// require_once "/api/app/model/Entities/implementacio/Login.php";
 require_once $_ENV["APP_ROOT"]."/app/model/Entities/implementacio/Login.php";
 require_once $_ENV["APP_ROOT"]."/app/model/PersistenceLayer/implementacio/MongoDb.php";
+
 use MongoDb;
 
 class LoginController extends Controller
@@ -70,8 +70,9 @@ class LoginController extends Controller
         
         return ['response' =>
             [
-                $this->login->autentificar($con)
-                //$this->login->toString()
+                //$this->login->autentificar($con)
+                // $this->login->toString()
+                $this->login->autentificar($this->con->connexio)
             ]
         ];
            

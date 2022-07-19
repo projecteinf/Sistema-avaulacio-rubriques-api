@@ -8,7 +8,7 @@
     class MongoDb implements IConnexio {
         public $connexio;
         public function __construct() {
-            $this->connexio = new MongoDB\Driver\Manager("mongodb://root:a@localhost:27017");
+            $this->connexio = new MongoDB\Driver\Manager("mongodb://admin:password@docker_mongo_1:27017/admin");
         }
 
     }
