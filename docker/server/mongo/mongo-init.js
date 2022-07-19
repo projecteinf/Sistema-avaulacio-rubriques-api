@@ -8,6 +8,14 @@ db.createUser(
   }
 );
 
+db.createUser(
+  {
+   user: "admin",
+   pwd: "password",
+   roles: [ { role: "root", db: "admin" } ]
+  }
+);
+
 // Creació usuaris de sistema per a la base de dades rubrica
 db.auth('admindb','a');
 db = db.getSiblingDB('rubrica');
