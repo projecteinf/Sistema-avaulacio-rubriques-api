@@ -3,7 +3,7 @@
     // require_once __DIR__."/implementacio/MongoDb.php";
     
 
-    $con = new \MongoDB\Driver\Manager("mongodb://root:a@docker_mongo_1:27017/admin");
+    $con = new \MongoDB\Driver\Manager("mongodb://professor:p@docker_mongo_1:27017/admin");
     if($con) {
         try {
             $filter = ['user' => 'acalvo','password' => 'a'];
