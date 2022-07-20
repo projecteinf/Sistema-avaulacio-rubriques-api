@@ -17,7 +17,7 @@
             $rows = $con->executeQuery('rubrica.usuaris',$query);
             
             
-            return $rows;
+            return count($rows->toArray());
         }
 
         public function toString() {
