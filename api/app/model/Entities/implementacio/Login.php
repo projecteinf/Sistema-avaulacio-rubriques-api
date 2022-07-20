@@ -11,21 +11,13 @@
         public function setPassword($password) { $this->password = $password;}
 
         public function  autentificar($con) {
-            $filter = [['user' => $this->name,'password' => $this->password]];
-            $options = ['projection'=>['user' => 1,'password' => 1 ]];
+            $filter = ['user' => $this->name,'password' => $this->password];
+            $options = [];
             $query = new \MongoDB\Driver\Query($filter,$options);
             $rows = $con->executeQuery('rubrica.usuaris',$query);
             
-            $result = "";
-            //$filter = ['user'=>'acalvo'];
-            //$options = [ 'projection' => ['_id' => 0 ]];
-            //$query = new MongoDB\Driver\Query($filter,$options);
-            //$rows = $con->executeQuery('rubrica.usuaris',$query); 
             
-            foreach ($rows as $r) {
-                $result = $r;
-            }
-            return $result;
+            return $rows;
         }
 
         public function toString() {
