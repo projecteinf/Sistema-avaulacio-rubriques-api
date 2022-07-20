@@ -3,10 +3,10 @@
     // require_once __DIR__."/implementacio/MongoDb.php";
     
 
-    $con = new \MongoDB\Driver\Manager("mongodb://admin:password@docker_mongo_1:27017/admin");
+    $con = new \MongoDB\Driver\Manager("mongodb://root:a@docker_mongo_1:27017/admin");
     if($con) {
         try {
-            $filter = ['user' => 'acalvo'];
+            $filter = ['user' => 'acalvo','password' => 'a'];
             $options = [];
             //$options = ['projection'=>['user' => 1,'password' => 1 ]];
             $query = new \MongoDB\Driver\Query($filter,$options);

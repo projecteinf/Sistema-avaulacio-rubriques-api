@@ -1,12 +1,13 @@
-db.auth('root', 'a')
+db.auth('root', 'a');
 
-db.createUser(
-  {
-    user: "admindb",
-    pwd: "a",
-    roles: [ { role: "readWrite", db: "rubrica" } ]
-  }
-);
+db = db.getSiblingDB('rubrica');
+db.createCollection('usuaris');
+db.usuaris.insert({
+  user: "acalvo",
+  password: "a"
+});
+
+db = db.getSiblingDB('admin');
 
 db.createUser(
   {
@@ -15,19 +16,6 @@ db.createUser(
    roles: [ { role: "root", db: "admin" } ]
   }
 );
-
-// Creació usuaris de sistema per a la base de dades rubrica
-db.auth('admindb','a');
-db = db.getSiblingDB('rubrica');
-
-
-
-db.createUser({
-   user: "rootapp",
-   pwd: "a",
-   roles:  [ "readWrite" ]
- });
-
 
 
 
@@ -44,13 +32,4 @@ db.createUser({
 });
 
 
-db.createCollection('usuaris')
-
-
-
-
-db.usuaris.insert({
-  user: "acalvo",
-  password: "a"
-});
 
