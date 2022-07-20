@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 
 require_once $_ENV["APP_ROOT"]."/app/model/Entities/implementacio/Login.php";
 require_once $_ENV["APP_ROOT"]."/app/model/PersistenceLayer/implementacio/MongoDb.php";
+require_once $_ENV["APP_ROOT"]."/app/Utilities/Utilities.php";
 
 use MongoDb;
 
@@ -69,7 +70,7 @@ class LoginController extends Controller
         $this->inicialitzarLogin(json_decode($postdata,false));
         $uid = "";
         if ($this->login->autentificar($this->con->connexio)==1) {
-            $uid = "generat id";
+            $uid = \Utilities::guidv4();
         }
         return ['response' =>
             [
