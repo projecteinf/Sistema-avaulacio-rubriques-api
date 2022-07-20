@@ -67,12 +67,13 @@ class LoginController extends Controller
         $postdata = file_get_contents("php://input");
         
         $this->inicialitzarLogin(json_decode($postdata,false));
-        
+        $uid = "";
+        if ($this->login->autentificar($this->con->connexio)==1) {
+            $uid = "generat id";
+        }
         return ['response' =>
             [
-                //$this->login->autentificar($con)
-                // $this->login->toString()
-                $this->login->autentificar($this->con->connexio)
+                $uid
             ]
         ];
            

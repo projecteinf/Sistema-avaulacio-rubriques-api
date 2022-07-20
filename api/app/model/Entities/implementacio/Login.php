@@ -15,8 +15,7 @@
             $options = [];
             $query = new \MongoDB\Driver\Query($filter,$options);
             $rows = $con->executeQuery('rubrica.usuaris',$query);
-            
-            
+
             return count($rows->toArray());
         }
 
