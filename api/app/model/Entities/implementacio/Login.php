@@ -11,7 +11,7 @@
         public function setPassword($password) { $this->password = $password;}
 
         public function  autentificar($con) {
-            $filter = [['user' => 'acalvo']];
+            $filter = [['user' => 'acalvo','password' => 'a']];
             $options = ['projection'=>['user' => 1,'password' => 1 ]];
             $query = new \MongoDB\Driver\Query($filter,$options);
             $rows = $con->executeQuery('rubrica.usuaris',$query);
