@@ -63,7 +63,6 @@ class LoginController extends Controller
 
     // Exemple crida: http://localhost:8080/api/login
     public function login(Request $request) {
-
         $this->cors();
         $postdata = file_get_contents("php://input");
         

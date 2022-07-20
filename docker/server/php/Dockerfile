@@ -32,7 +32,7 @@ RUN pecl install mongodb
 RUN curl -sS https://getcomposer.org/installer | php 
 RUN mv composer.phar /usr/bin/composer
 RUN composer require mongodb/mongodb --ignore-platform-reqs
-
+# RUN composer require firebase/php-jwt
 
 
 # RUN echo "display_errors = On" >> /usr/local/etc/php/php.ini-development

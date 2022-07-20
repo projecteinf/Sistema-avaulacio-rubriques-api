@@ -1,5 +1,6 @@
 <?php
     namespace App\Http\Controllers;
+    session_start();
     // require_once __DIR__."/implementacio/MongoDb.php";
     require_once __DIR__."/../../Utilities/Utilities.php";
 
@@ -14,8 +15,13 @@
             //echo count($rows->toArray());
             foreach ($rows as $row) {
                  var_dump($row);
-                 var_dump(\Utilities::guidv4());
+                 $uid=\Utilities::guidv4();
+                 //$uid="ValorFix";
+                 //if (!isset($_SERVER[$uid])) $_SERVER[$uid] = $uid;
+                 //else $_SERVER[$uid] = $uid."OKKKKKKKKKKKKKK";
+                 
             }
+            var_dump(session_id());
         } catch (Excption $e) {
             echo "Error {$e->getMessage()}";
         }
