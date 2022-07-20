@@ -51,6 +51,6 @@ db.createCollection('usuaris')
 
 db.usuaris.insert({
   user: "acalvo",
-  pwd: "a"
+  password: "a"
 });
 
