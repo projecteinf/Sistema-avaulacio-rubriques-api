@@ -2,30 +2,24 @@
     namespace App\Http\Controllers;
 
     require_once __DIR__."/../../../vendor/php-jwt/JWT.php";
+    require_once __DIR__."/../../../vendor/php-jwt/Key.php";
+    require_once __DIR__."/../../../vendor/php-jwt/ExpiredException.php";
     require_once __DIR__."/../../Utilities/Token.php";
 
-    header("Access-Control-Allow-Origin: *");
-    header("Content-Type: application/json; charset=UTF-8");
-    header("Access-Control-Allow-Methods: POST");
-    header("Access-Control-Max-Age: 3600");
-    header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
-
-
+   
     $secret_key = "YOUR_SECRET_KEY";
-    $jwt = null;
-    
-    $data = json_decode(file_get_contents("php://input"));
-    $authHeader = $_SERVER['HTTP_AUTHORIZATION'];
+    $authHeader = 'Bearer {"message":"Successful","jwt":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJET0NLRVJfUEhQXzEiLCJhdWQiOiJUSEVfQVVESUVOQ0UiLCJpYXQiOjE2NTg0Mjk4MjYsIm5iZiI6MTY1ODQyOTgzNiwiZXhwIjoxNjU4NDI5ODMyLCJkYXRhIjp7ImlkIjoiNjJkN2VhYjU1OTdmMThmODE0N2JiMGE4IiwibmFtZSI6ImFjYWx2byJ9fQ.xNovxW0WO-wzD_enOFokFStLaBpTin1O0V_cYapOQHaYBrVsp3vEtgONAux8bvKd9do3y35BXaFZFGKOP4EMSw","name":"acalvo","expireAt":1658429832}';
 
     $arr = explode(" ", $authHeader);
 
-    $jwt = $arr[1];
+    $jwt = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJET0NLRVJfUEhQXzEiLCJhdWQiOiJUSEVfQVVESUVOQ0UiLCJpYXQiOjE2NTg0MzEyMTEsIm5iZiI6MTY1ODQzMTIyMSwiZXhwIjoxNjU4NDMxMjE3LCJkYXRhIjp7ImlkIjoiNjJkN2VhYjU1OTdmMThmODE0N2JiMGE4IiwibmFtZSI6ImFjYWx2byJ9fQ.h685h47GJj3as8AmsYP03BOy2OC1uNSlh41FI5ryyMHly8RfPSHN5NRgHR_3pbWOJDCCIhFiBceRzcI4YzQ_mg";
+    echo $jwt;
 
     if($jwt){
 
         try {
 
-            $decoded = JWT::decode($jwt, $secret_key, array('HS256'));
+            $decoded = \Firebase\JWT\JWT::decode($jwt,  new \Firebase\JWT\Key($secret_key, 'HS512'));
 
             // Access is granted. Add code of the operation here 
 

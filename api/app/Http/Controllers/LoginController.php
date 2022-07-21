@@ -7,6 +7,8 @@ require_once $_ENV["APP_ROOT"]."/app/model/Entities/implementacio/Login.php";
 require_once $_ENV["APP_ROOT"]."/app/model/PersistenceLayer/implementacio/MongoDb.php";
 require_once $_ENV["APP_ROOT"]."/app/Utilities/Token.php";
 require_once $_ENV["APP_ROOT"]."/vendor/php-jwt/JWT.php";
+require_once $_ENV["APP_ROOT"]."/vendor/php-jwt/Key.php";
+require_once $_ENV["APP_ROOT"]."/vendor/php-jwt/ExpiredException.php";
 
 use MongoDb;
 
@@ -49,7 +51,7 @@ class LoginController extends Controller
         $jwt = \Firebase\JWT\JWT::encode($token, $data->secret_key, 'HS512');
         return json_encode(
             array(
-                "message" => "Successful login.",
+                "message" => "Successful",
                 "jwt" => $jwt,
                 "name" => $data->name,
                 "expireAt" => $data->expire_claim
@@ -63,12 +65,12 @@ class LoginController extends Controller
         $authHeader = $_SERVER['HTTP_AUTHORIZATION'];
         $arr = explode(" ", $authHeader);
         $jwt = $arr[1];
-        
+        return $authHeader;
         if($jwt){
         
             try {
                 
-                $decoded = JWT::decode($jwt, $secret_key, array('HS256'));
+                $decoded = \Firebase\JWT\JWT::decode($jwt, $secret_key, array('HS512'));
                 return "OK";
                 // Access is granted. Add code of the operation here 
         
