@@ -7,9 +7,7 @@ class Token {
     public Int $notbefore_claim; //not before in seconds
     public Int $expire_claim; // expire time in seconds
     public String $id;
-    public String $firstName;
-    public String $lastName;
-    public String $email;
+    public String $name;
 
     public function __construct($secret_key,$issuer_claim,$audience_claim,$id) {
         $this->secret_key = $secret_key;
