@@ -60,20 +60,19 @@ class LoginController extends Controller
             ));
     }
     private function validarUsuari() {
-        // $secret_key = "YOUR_SECRET_KEY";
-        // $jwt = null;
+        $secret_key = "YOUR_SECRET_KEY";
+        $jwt = null;
         
         // $data = json_decode(file_get_contents("php://input"));
-        // if (!isset($_SERVER['HTTP_AUTHORIZATION'])) return "NOT SET";
-        // else return $_SERVER['HTTP_AUTHORIZATION'];
-        return "ok";
+        if (!isset($_SERVER['HTTP_AUTHORIZATION'])) return "NOT SET";
+        else return $_SERVER['HTTP_AUTHORIZATION'];
+        
     }
 
     public function index() {
         return ['response' =>
             [
-                //$this->validarUsuari()
-                $_SERVER
+                $this->validarUsuari()
             ]
         ];
 
