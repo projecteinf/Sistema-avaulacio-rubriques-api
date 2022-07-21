@@ -5,7 +5,7 @@ use Illuminate\Http\Request;
 
 require_once $_ENV["APP_ROOT"]."/app/model/Entities/implementacio/Login.php";
 require_once $_ENV["APP_ROOT"]."/app/model/PersistenceLayer/implementacio/MongoDb.php";
-require_once $_ENV["APP_ROOT"]."/app/Utilities/Utilities.php";
+
 
 use MongoDb;
 
@@ -13,6 +13,11 @@ class LoginController extends Controller
 {
     private Login $login;
     private MongoDb $con;
+
+    public function __construct() {
+        $this->login = new Login();
+        $this->con = new MongoDb();
+    }
 
     private function cors() {
         
@@ -44,11 +49,6 @@ class LoginController extends Controller
         $this->login->setPassword($dada->password);
     }
 
-    public function __construct() {
-        $this->login = new Login();
-        $this->con = new MongoDb();
-    }
-
     public function index() {
         $this->cors();
         return ['response' =>
@@ -61,22 +61,21 @@ class LoginController extends Controller
 
     }
 
+    private function generarJWT() {
+        return "OKK";
+    }
+
     // Exemple crida: http://localhost:8080/api/login
     public function login(Request $request) {
         $this->cors();
         $postdata = file_get_contents("php://input");
         
         $this->inicialitzarLogin(json_decode($postdata,false));
-        $uid = "";
-        if ($this->login->autentificar($this->con->connexio)==1) {
-            
-        }
-        return ['response' =>
-            [
-                $postdata
-            ]
-        ];
-           
+        //if ($this->login->autentificar($this->con->connexio)==1) 
+        $id="SSS";
+        //$id=$this->generarJWT();
+        return ['response' => [$id]];
+        
     }
 
     
