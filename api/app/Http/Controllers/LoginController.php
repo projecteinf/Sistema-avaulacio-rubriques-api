@@ -20,40 +20,7 @@ class LoginController extends Controller
         $this->con = new MongoDb();
     }
 
-    private function cors() {
-        // Allow from any origin - ORIGINAL
-        /* if (isset($_SERVER['HTTP_ORIGIN'])) {
-            // Decide if the origin in $_SERVER['HTTP_ORIGIN'] is one
-            // you want to allow, and if so:
-            header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
-            header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With, X-Token");
-            header("Access-Control-Request-Headers: Content-Type");
-            header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
-            header('Access-Control-Allow-Credentials: true');
-            header('Access-Control-Max-Age: 86400');    // cache for 1 day
-        }
-        
-        // Access-Control headers are received during OPTIONS requests
-        if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
-            
-            if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD']))
-                header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
-            
-            if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']))
-                //header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
-                header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}, Content-Type, Authorization, X-Requested-With");
-        
-            exit(0);
-        } */
-
-        // header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
-        // header('Access-Control-Allow-Credentials: true');
-        // header('Access-Control-Allow-Methods: HEAD, DELETE, POST, PUT, GET, OPTIONS');
-        // header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With');
-        // header('Access-Control-Expose-Headers: Authorization');
-        // header("Authorization: *");
-
-    }
+    
 
     private function inicialitzarLogin($dada) {
         $this->login->setName($dada->usuari);
@@ -93,13 +60,6 @@ class LoginController extends Controller
             ));
     }
     private function validarUsuari() {
-        // header("Access-Control-Allow-Origin: *");
-        // header("Content-Type: application/json; charset=UTF-8");
-        // header("Access-Control-Allow-Methods: POST");
-        // header("Access-Control-Max-Age: 3600");
-        // header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
-
-
         // $secret_key = "YOUR_SECRET_KEY";
         // $jwt = null;
         
@@ -110,7 +70,6 @@ class LoginController extends Controller
     }
 
     public function index() {
-        $this->cors();
         return ['response' =>
             [
                 //$this->validarUsuari()
@@ -124,7 +83,6 @@ class LoginController extends Controller
 
     // Exemple crida: http://localhost:8080/api/login
     public function login(Request $request) {
-        $this->cors();
         $postdata = file_get_contents("php://input");
         
         $this->inicialitzarLogin(json_decode($postdata,false));
