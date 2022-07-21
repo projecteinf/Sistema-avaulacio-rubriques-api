@@ -5,7 +5,7 @@ use Illuminate\Http\Request;
 
 require_once $_ENV["APP_ROOT"]."/app/model/Entities/implementacio/Login.php";
 require_once $_ENV["APP_ROOT"]."/app/model/PersistenceLayer/implementacio/MongoDb.php";
-
+require_once $_ENV["APP_ROOT"]."/vendor/php-jwt/JWT.php";
 
 use MongoDb;
 
@@ -71,10 +71,7 @@ class LoginController extends Controller
         $postdata = file_get_contents("php://input");
         
         $this->inicialitzarLogin(json_decode($postdata,false));
-        //if ($this->login->autentificar($this->con->connexio)==1) 
-        $id="SSS";
-        //$id=$this->generarJWT();
-        return ['response' => [$id]];
+        if ($this->login->autentificar($this->con->connexio)==1) return ['response' => [$this->generarJWT()]];
         
     }
 
