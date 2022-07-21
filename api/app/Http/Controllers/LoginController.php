@@ -62,13 +62,8 @@ class LoginController extends Controller
 
     }
 
-    private function generarJWT() {
-        $data = new \Token("YOUR_SECRET_KEY","DOCKER_PHP_1","THE_AUDIENCE","62d7eab5597f18f8147bb0a8");
-        $data->firstname="alex";
-        $data->lastname="calvo";
-        $data->email="acalvo@boscdelacoma.cat";
-
-        $token = array(
+    private function inicialitzarToken($data) {
+        return array(
             "iss" => $data->issuer_claim,
             "aud" => $data->audience_claim,
             "iat" => $data->issuedat_claim,
@@ -79,7 +74,16 @@ class LoginController extends Controller
                 "firstname" => $data->firstname,
                 "lastname" => $data->lastname,
                 "email" => $data->email
-        ));
+            ));
+    }
+
+    private function generarJWT() {
+        $data = new \Token("YOUR_SECRET_KEY","DOCKER_PHP_1","THE_AUDIENCE","62d7eab5597f18f8147bb0a8");
+        $data->firstname="alex";
+        $data->lastname="calvo";
+        $data->email="acalvo@boscdelacoma.cat";
+
+        $token = $this->inicialitzarToken($data);
 
         http_response_code(200);
 
