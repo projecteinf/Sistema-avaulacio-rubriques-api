@@ -3,6 +3,7 @@
     session_start();
     // require_once __DIR__."/implementacio/MongoDb.php";
     require_once __DIR__."/../../../vendor/php-jwt/JWT.php";
+    require_once __DIR__."/../../Utilities/Token.php";
 
     $con = new \MongoDB\Driver\Manager("mongodb://professor:p@docker_mongo_1:27017/admin");
     if($con) {
@@ -15,45 +16,38 @@
             //echo count($rows->toArray());
             foreach ($rows as $row) {
                  var_dump($row);
-                 
-                 $secret_key = "YOUR_SECRET_KEY";
-                 $issuer_claim = "THE_ISSUER"; // this can be the servername
-                 $audience_claim = "THE_AUDIENCE";
-                 $issuedat_claim = time(); // issued at
-                 $notbefore_claim = $issuedat_claim + 10; //not before in seconds
-                 $expire_claim = $issuedat_claim + 60; // expire time in seconds
-                 $id="62d7eab5597f18f8147bb0a8";
-                 $firstname="alex";
-                 $lastname="calvo";
-                 $email="acalvo@boscdelacoma.cat";
+                 $data = new \Token("YOUR_SECRET_KEY","DOCKER_PHP_1","THE_AUDIENCE","62d7eab5597f18f8147bb0a8");
+                 $data->firstname="alex";
+                 $data->lastname="calvo";
+                 $data->email="acalvo@boscdelacoma.cat";
 
                  $token = array(
-                     "iss" => $issuer_claim,
-                     "aud" => $audience_claim,
-                     "iat" => $issuedat_claim,
-                     "nbf" => $notbefore_claim,
-                     "exp" => $expire_claim,
+                     "iss" => $data->issuer_claim,
+                     "aud" => $data->audience_claim,
+                     "iat" => $data->issuedat_claim,
+                     "nbf" => $data->notbefore_claim,
+                     "exp" => $data->expire_claim,
                      "data" => array(
-                         "id" => $id,
-                         "firstname" => $firstname,
-                         "lastname" => $lastname,
-                         "email" => $email
+                         "id" => $data->id,
+                         "firstname" => $data->firstname,
+                         "lastname" => $data->lastname,
+                         "email" => $data->email
                  ));
          
                  http_response_code(200);
          
-                 $jwt = \Firebase\JWT\JWT::encode($token, $secret_key, 'HS512');
+                 $jwt = \Firebase\JWT\JWT::encode($token, $data->secret_key, 'HS512');
                  echo json_encode(
                      array(
                          "message" => "Successful login.",
                          "jwt" => $jwt,
-                         "email" => $email,
-                         "expireAt" => $expire_claim
+                         "email" => $data->email,
+                         "expireAt" => $data->expire_claim
                      ));
 
                  
             }
-            var_dump(session_id());
+            
         } catch (Excption $e) {
             echo "Error {$e->getMessage()}";
         }
