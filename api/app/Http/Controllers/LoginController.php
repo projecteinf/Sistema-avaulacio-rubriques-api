@@ -49,19 +49,7 @@ class LoginController extends Controller
         $this->login->setName($dada->usuari);
         $this->login->setPassword($dada->password);
     }
-
-    public function index() {
-        $this->cors();
-        return ['response' =>
-            [
-                'id' => 1,
-                'user' => 'Usuari exemple',
-                'password' => 'Password exemple'
-            ]
-        ];
-
-    }
-
+    
     private function inicialitzarToken($data) {
         return array(
             "iss" => $data->issuer_claim,
@@ -96,6 +84,20 @@ class LoginController extends Controller
                 "expireAt" => $data->expire_claim
             ));
     }
+
+    public function index() {
+        $this->cors();
+        return ['response' =>
+            [
+                'id' => 1,
+                'user' => 'Usuari exemple',
+                'password' => 'Password exemple'
+            ]
+        ];
+
+    }
+
+    
 
     // Exemple crida: http://localhost:8080/api/login
     public function login(Request $request) {
