@@ -21,7 +21,6 @@ class LoginController extends Controller
     }
 
     private function cors() {
-        
         // Allow from any origin - ORIGINAL
         /* if (isset($_SERVER['HTTP_ORIGIN'])) {
             // Decide if the origin in $_SERVER['HTTP_ORIGIN'] is one
