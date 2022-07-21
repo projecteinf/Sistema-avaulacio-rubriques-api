@@ -69,11 +69,11 @@ class LoginController extends Controller
         $this->inicialitzarLogin(json_decode($postdata,false));
         $uid = "";
         if ($this->login->autentificar($this->con->connexio)==1) {
-            $uid = \Utilities::guidv4();
+            
         }
         return ['response' =>
             [
-                $uid
+                $postdata
             ]
         ];
            
