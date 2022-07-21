@@ -32,6 +32,7 @@ RUN pecl install mongodb
 RUN curl -sS https://getcomposer.org/installer | php 
 RUN mv composer.phar /usr/bin/composer
 RUN composer require mongodb/mongodb --ignore-platform-reqs
+# RUN composer require tymon/jwt-auth
 # RUN composer require firebase/php-jwt
 
 
