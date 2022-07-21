@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 
 require_once $_ENV["APP_ROOT"]."/app/model/Entities/implementacio/Login.php";
 require_once $_ENV["APP_ROOT"]."/app/model/PersistenceLayer/implementacio/MongoDb.php";
+require_once $_ENV["APP_ROOT"]."/app/Utilities/Token.php";
 require_once $_ENV["APP_ROOT"]."/vendor/php-jwt/JWT.php";
 
 use MongoDb;
@@ -62,7 +63,34 @@ class LoginController extends Controller
     }
 
     private function generarJWT() {
-        return "OKK";
+        $data = new \Token("YOUR_SECRET_KEY","DOCKER_PHP_1","THE_AUDIENCE","62d7eab5597f18f8147bb0a8");
+        $data->firstname="alex";
+        $data->lastname="calvo";
+        $data->email="acalvo@boscdelacoma.cat";
+
+        $token = array(
+            "iss" => $data->issuer_claim,
+            "aud" => $data->audience_claim,
+            "iat" => $data->issuedat_claim,
+            "nbf" => $data->notbefore_claim,
+            "exp" => $data->expire_claim,
+            "data" => array(
+                "id" => $data->id,
+                "firstname" => $data->firstname,
+                "lastname" => $data->lastname,
+                "email" => $data->email
+        ));
+
+        http_response_code(200);
+
+        $jwt = \Firebase\JWT\JWT::encode($token, $data->secret_key, 'HS512');
+        return json_encode(
+            array(
+                "message" => "Successful login.",
+                "jwt" => $jwt,
+                "email" => $data->email,
+                "expireAt" => $data->expire_claim
+            ));
     }
 
     // Exemple crida: http://localhost:8080/api/login
