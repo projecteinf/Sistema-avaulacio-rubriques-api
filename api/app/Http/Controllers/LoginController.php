@@ -77,7 +77,7 @@ class LoginController extends Controller
             ));
     }
 
-    private function generarJWT() {
+    private function generarJWT() {  // https://www.techiediaries.com/php-jwt-authentication-tutorial/
         $data = new \Token("YOUR_SECRET_KEY","DOCKER_PHP_1","THE_AUDIENCE","62d7eab5597f18f8147bb0a8");
         $data->firstname="alex";
         $data->lastname="calvo";
@@ -104,8 +104,5 @@ class LoginController extends Controller
         
         $this->inicialitzarLogin(json_decode($postdata,false));
         if ($this->login->autentificar($this->con->connexio)==1) return ['response' => [$this->generarJWT()]];
-        
     }
-
-    
 }
