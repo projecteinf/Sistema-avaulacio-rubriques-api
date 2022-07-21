@@ -22,10 +22,13 @@ class LoginController extends Controller
 
     private function cors() {
         
-        // Allow from any origin
-        if (isset($_SERVER['HTTP_ORIGIN'])) {
+        // Allow from any origin - ORIGINAL
+        /* if (isset($_SERVER['HTTP_ORIGIN'])) {
             // Decide if the origin in $_SERVER['HTTP_ORIGIN'] is one
             // you want to allow, and if so:
+            header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+            header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With, X-Token");
+            header("Access-Control-Request-Headers: Content-Type");
             header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
             header('Access-Control-Allow-Credentials: true');
             header('Access-Control-Max-Age: 86400');    // cache for 1 day
@@ -42,14 +45,21 @@ class LoginController extends Controller
                 header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}, Content-Type, Authorization, X-Requested-With");
         
             exit(0);
-        }
+        } */
+
+        // header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
+        // header('Access-Control-Allow-Credentials: true');
+        // header('Access-Control-Allow-Methods: HEAD, DELETE, POST, PUT, GET, OPTIONS');
+        // header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With');
+        // header('Access-Control-Expose-Headers: Authorization');
+        // header("Authorization: *");
+
     }
 
     private function inicialitzarLogin($dada) {
         $this->login->setName($dada->usuari);
         $this->login->setPassword($dada->password);
     }
-    
     private function inicialitzarToken($data) {
         return array(
             "iss" => $data->issuer_claim,
@@ -64,7 +74,6 @@ class LoginController extends Controller
                 "email" => $data->email
             ));
     }
-
     private function generarJWT() {  // https://www.techiediaries.com/php-jwt-authentication-tutorial/
         $data = new \Token("YOUR_SECRET_KEY","DOCKER_PHP_1","THE_AUDIENCE","62d7eab5597f18f8147bb0a8");
         $data->firstname="alex";
@@ -84,14 +93,29 @@ class LoginController extends Controller
                 "expireAt" => $data->expire_claim
             ));
     }
+    private function validarUsuari() {
+        // header("Access-Control-Allow-Origin: *");
+        // header("Content-Type: application/json; charset=UTF-8");
+        // header("Access-Control-Allow-Methods: POST");
+        // header("Access-Control-Max-Age: 3600");
+        // header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+
+
+        // $secret_key = "YOUR_SECRET_KEY";
+        // $jwt = null;
+        
+        // $data = json_decode(file_get_contents("php://input"));
+        // if (!isset($_SERVER['HTTP_AUTHORIZATION'])) return "NOT SET";
+        // else return $_SERVER['HTTP_AUTHORIZATION'];
+        return "ok";
+    }
 
     public function index() {
         $this->cors();
         return ['response' =>
             [
-                'id' => 1,
-                'user' => 'Usuari exemple',
-                'password' => 'Password exemple'
+                //$this->validarUsuari()
+                $_SERVER
             ]
         ];
 
