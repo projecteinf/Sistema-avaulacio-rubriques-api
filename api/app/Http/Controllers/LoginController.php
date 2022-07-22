@@ -62,32 +62,33 @@ class LoginController extends Controller
 
     private function validarUsuari() {
         $secret_key = "YOUR_SECRET_KEY";
-        $authHeader = $_SERVER['HTTP_AUTHORIZATION'];
-        $token = \Token::fromBearer($authHeader);
-        return "{$token->jwt}";
-        if($token->jwt){
+        //$authHeader = 'Bearer {"message":"Successful","jwt":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJET0NLRVJfUEhQXzEiLCJhdWQiOiJUSEVfQVVESUVOQ0UiLCJpYXQiOjE2NTg1MTU5MDgsIm5iZiI6MTY1ODUxNjAwOCwiZXhwIjoxNjU4NTE5NTA4LCJkYXRhIjp7ImlkIjoiNjJkN2VhYjU1OTdmMThmODE0N2JiMGE4IiwibmFtZSI6ImFjYWx2byJ9fQ.tDpwhtZ5GTwl6ooToFXnaPm1fkmoxK4Yl67707IWBtp_pb-C3OdSf8VKoDEJy4hm22WSsCmiTY9yI6fIhP8gPQ","name":"acalvo","expireAt":1658519508}';
+        $authHeader = $_SERVER['HTTP_AUTHORIZATION'];        
+        $jwt = \Token::fromBearer($authHeader)->jwt;
+        
+        
+        if($jwt){
         
             try {
-                
-                $decoded = \Firebase\JWT\JWT::decode($token->jwt, $secret_key, array('HS512'));
+                $decoded = \Firebase\JWT\JWT::decode($jwt,  new \Firebase\JWT\Key($secret_key, 'HS512'));
+    
                 // Access is granted. Add code of the operation here 
-        
+    
                 return json_encode(array(
                     "message" => "Access granted:",
-                    "error" => $e->getMessage()
+                    "error" => "No error"
                 ));
-        
+    
             }catch (Exception $e){
-        
+    
                 http_response_code(401);
-            
-                return json_encode(array(
+        
+                echo json_encode(array(
                     "message" => "Access denied.",
                     "error" => $e->getMessage()
                 ));
             }
-        }
-
+        } 
     }
 
     public function index() {
