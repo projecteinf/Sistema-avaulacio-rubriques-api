@@ -9,19 +9,14 @@
 
    
     $secret_key = "YOUR_SECRET_KEY";
-    $authHeader = 'Bearer {"message":"Successful","jwt":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJET0NLRVJfUEhQXzEiLCJhdWQiOiJUSEVfQVVESUVOQ0UiLCJpYXQiOjE2NTg0Mjk4MjYsIm5iZiI6MTY1ODQyOTgzNiwiZXhwIjoxNjU4NDI5ODMyLCJkYXRhIjp7ImlkIjoiNjJkN2VhYjU1OTdmMThmODE0N2JiMGE4IiwibmFtZSI6ImFjYWx2byJ9fQ.xNovxW0WO-wzD_enOFokFStLaBpTin1O0V_cYapOQHaYBrVsp3vEtgONAux8bvKd9do3y35BXaFZFGKOP4EMSw","name":"acalvo","expireAt":1658429832}';
-    echo \Token::fromBearer($authHeader);
-
-    $arr = explode(" ", $authHeader);
-
-    $jwt = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJET0NLRVJfUEhQXzEiLCJhdWQiOiJUSEVfQVVESUVOQ0UiLCJpYXQiOjE2NTg1MDIyMjMsIm5iZiI6MTY1ODUwMjMyMywiZXhwIjoxNjU4NTAyODIzLCJkYXRhIjp7ImlkIjoiNjJkN2VhYjU1OTdmMThmODE0N2JiMGE4IiwibmFtZSI6ImFjYWx2byJ9fQ.RJqKQ7wirZCquG0GJHUCMVV1nQ4xVMckH2oS_SxUMUu03J07sc_4NyXAaOIdmH5xIgIDeKy_3ejF_L2fvl8msg";
-    $json = json_decode($arr[1]);
-    echo "JWT: {$json->jwt}";
+    $authHeader = 'Bearer {"message":"Successful","jwt":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJET0NLRVJfUEhQXzEiLCJhdWQiOiJUSEVfQVVESUVOQ0UiLCJpYXQiOjE2NTg1MTU5MDgsIm5iZiI6MTY1ODUxNjAwOCwiZXhwIjoxNjU4NTE5NTA4LCJkYXRhIjp7ImlkIjoiNjJkN2VhYjU1OTdmMThmODE0N2JiMGE4IiwibmFtZSI6ImFjYWx2byJ9fQ.tDpwhtZ5GTwl6ooToFXnaPm1fkmoxK4Yl67707IWBtp_pb-C3OdSf8VKoDEJy4hm22WSsCmiTY9yI6fIhP8gPQ","name":"acalvo","expireAt":1658519508}';
+    $jwt = \Token::fromBearer($authHeader)->jwt;
+    echo $jwt;
+    //$jwt = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJET0NLRVJfUEhQXzEiLCJhdWQiOiJUSEVfQVVESUVOQ0UiLCJpYXQiOjE2NTg1MTM0MDIsIm5iZiI6MTY1ODUxNDQwMiwiZXhwIjoxNjU4NTE3MDAyLCJkYXRhIjp7ImlkIjoiNjJkN2VhYjU1OTdmMThmODE0N2JiMGE4IiwibmFtZSI6ImFjYWx2byJ9fQ.DlzFyI8iNh1fCnpLbMg71TmEEstzjsg3kB6Y3HHr2Ueye-hjRDTPb9aE0qD8zz5_eqCBxS7RNkW1JBIs8mAOYw";
     
     if($jwt){
 
         try {
-
             $decoded = \Firebase\JWT\JWT::decode($jwt,  new \Firebase\JWT\Key($secret_key, 'HS512'));
 
             // Access is granted. Add code of the operation here 

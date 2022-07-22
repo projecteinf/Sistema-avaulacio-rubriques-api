@@ -43,7 +43,6 @@ class LoginController extends Controller
     }
 
     private function generarJWT() {  // https://www.techiediaries.com/php-jwt-authentication-tutorial/
-        //$data = new \Token("YOUR_SECRET_KEY","DOCKER_PHP_1","THE_AUDIENCE","62d7eab5597f18f8147bb0a8");
         $data = \Token::jwt("YOUR_SECRET_KEY","DOCKER_PHP_1","THE_AUDIENCE","62d7eab5597f18f8147bb0a8");
         $data->name="acalvo";
         
@@ -65,14 +64,12 @@ class LoginController extends Controller
         $secret_key = "YOUR_SECRET_KEY";
         $authHeader = $_SERVER['HTTP_AUTHORIZATION'];
         $token = \Token::fromBearer($authHeader);
-        return $token;
-
-        if($jwt){
+        return "{$token->jwt}";
+        if($token->jwt){
         
             try {
                 
-                $decoded = \Firebase\JWT\JWT::decode($jwt, $secret_key, array('HS512'));
-                return "OK";
+                $decoded = \Firebase\JWT\JWT::decode($token->jwt, $secret_key, array('HS512'));
                 // Access is granted. Add code of the operation here 
         
                 return json_encode(array(

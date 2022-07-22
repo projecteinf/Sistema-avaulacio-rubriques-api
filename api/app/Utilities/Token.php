@@ -20,7 +20,7 @@ class Token {
         $instance->issuer_claim = $issuer_claim;
         $instance->audience_claim = $audience_claim;
         $instance->issuedat_claim = time();
-        $instance->notbefore_claim = $instance->issuedat_claim + 1000;
+        $instance->notbefore_claim = $instance->issuedat_claim + 100;
         $instance->expire_claim = $instance->issuedat_claim + 3600;
         $instance->id=$id;
         return $instance;
