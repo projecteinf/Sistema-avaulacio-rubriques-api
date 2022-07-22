@@ -14,8 +14,9 @@
     $arr = explode(" ", $authHeader);
 
     $jwt = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJET0NLRVJfUEhQXzEiLCJhdWQiOiJUSEVfQVVESUVOQ0UiLCJpYXQiOjE2NTg1MDIyMjMsIm5iZiI6MTY1ODUwMjMyMywiZXhwIjoxNjU4NTAyODIzLCJkYXRhIjp7ImlkIjoiNjJkN2VhYjU1OTdmMThmODE0N2JiMGE4IiwibmFtZSI6ImFjYWx2byJ9fQ.RJqKQ7wirZCquG0GJHUCMVV1nQ4xVMckH2oS_SxUMUu03J07sc_4NyXAaOIdmH5xIgIDeKy_3ejF_L2fvl8msg";
-    //echo $jwt;
-
+    $json = json_decode($arr[1]);
+    echo "JWT: {$json->jwt}";
+    
     if($jwt){
 
         try {

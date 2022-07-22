@@ -67,8 +67,8 @@ class LoginController extends Controller
         $authHeader = $_SERVER['HTTP_AUTHORIZATION'];
         $arr = explode(" ", $authHeader);
         $jwt = $arr[1];
-        $json = JSON.parse($jwt);
-        return $json;
+        
+
         if($jwt){
         
             try {
