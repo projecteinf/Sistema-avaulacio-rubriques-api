@@ -43,7 +43,8 @@ class LoginController extends Controller
     }
 
     private function generarJWT() {  // https://www.techiediaries.com/php-jwt-authentication-tutorial/
-        $data = new \Token("YOUR_SECRET_KEY","DOCKER_PHP_1","THE_AUDIENCE","62d7eab5597f18f8147bb0a8");
+        //$data = new \Token("YOUR_SECRET_KEY","DOCKER_PHP_1","THE_AUDIENCE","62d7eab5597f18f8147bb0a8");
+        $data = \Token::jwt("YOUR_SECRET_KEY","DOCKER_PHP_1","THE_AUDIENCE","62d7eab5597f18f8147bb0a8");
         $data->name="acalvo";
         
         $token = $this->inicialitzarToken($data);
@@ -62,12 +63,9 @@ class LoginController extends Controller
 
     private function validarUsuari() {
         $secret_key = "YOUR_SECRET_KEY";
-        $jwt = null;
-        
         $authHeader = $_SERVER['HTTP_AUTHORIZATION'];
-        $arr = explode(" ", $authHeader);
-        $jwt = $arr[1];
-        
+        $token = \Token::fromBearer($authHeader);
+        return $token;
 
         if($jwt){
         

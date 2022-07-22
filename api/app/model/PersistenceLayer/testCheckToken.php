@@ -10,6 +10,7 @@
    
     $secret_key = "YOUR_SECRET_KEY";
     $authHeader = 'Bearer {"message":"Successful","jwt":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJET0NLRVJfUEhQXzEiLCJhdWQiOiJUSEVfQVVESUVOQ0UiLCJpYXQiOjE2NTg0Mjk4MjYsIm5iZiI6MTY1ODQyOTgzNiwiZXhwIjoxNjU4NDI5ODMyLCJkYXRhIjp7ImlkIjoiNjJkN2VhYjU1OTdmMThmODE0N2JiMGE4IiwibmFtZSI6ImFjYWx2byJ9fQ.xNovxW0WO-wzD_enOFokFStLaBpTin1O0V_cYapOQHaYBrVsp3vEtgONAux8bvKd9do3y35BXaFZFGKOP4EMSw","name":"acalvo","expireAt":1658429832}';
+    echo \Token::fromBearer($authHeader);
 
     $arr = explode(" ", $authHeader);
 
