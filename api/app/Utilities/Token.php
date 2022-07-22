@@ -14,8 +14,8 @@ class Token {
         $this->issuer_claim = $issuer_claim;
         $this->audience_claim = $audience_claim;
         $this->issuedat_claim = time();
-        $this->notbefore_claim = $this->issuedat_claim + 100;
-        $this->expire_claim = $this->issuedat_claim + 600;
+        $this->notbefore_claim = $this->issuedat_claim + 1000;
+        $this->expire_claim = $this->issuedat_claim + 3600;
         $this->id=$id;
     }
 }
