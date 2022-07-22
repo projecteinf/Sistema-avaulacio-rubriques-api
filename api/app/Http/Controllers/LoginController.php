@@ -9,6 +9,8 @@ require_once $_ENV["APP_ROOT"]."/app/Utilities/Token.php";
 require_once $_ENV["APP_ROOT"]."/vendor/php-jwt/JWT.php";
 require_once $_ENV["APP_ROOT"]."/vendor/php-jwt/Key.php";
 require_once $_ENV["APP_ROOT"]."/vendor/php-jwt/ExpiredException.php";
+require_once $_ENV["APP_ROOT"]."/vendor/php-jwt/BeforeValidException.php";
+
 
 use MongoDb;
 
@@ -65,7 +67,8 @@ class LoginController extends Controller
         $authHeader = $_SERVER['HTTP_AUTHORIZATION'];
         $arr = explode(" ", $authHeader);
         $jwt = $arr[1];
-        return $authHeader;
+        $json = JSON.parse($jwt);
+        return $json;
         if($jwt){
         
             try {
