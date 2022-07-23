@@ -30,6 +30,7 @@ class Token {
         $arr = explode(" ", $bearer);
         $json = json_decode($arr[1]);
         $instance->jwt = $json->jwt;
+        $instance->name = $json->name;
         return $instance;
     }
 }

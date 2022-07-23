@@ -66,18 +66,21 @@ class LoginController extends Controller
     private function validarUsuari() {
         $secret_key = "YOUR_SECRET_KEY";        
         $authHeader = $_SERVER['HTTP_AUTHORIZATION'];        
-        //$authHeader = 'Bearer {"message":"Successful","jwt":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJET0NLRVJfUEhQXzEiLCJhdWQiOiJUSEVfQVVESUVOQ0UiLCJpYXQiOjE2NTg1MTU5MDgsIm5iZiI6MTY1ODUxNjAwOCwiZXhwIjoxNjU4NTE5NTA4LCJkYXRhIjp7ImlkIjoiNjJkN2VhYjU1OTdmMThmODE0N2JiMGE4IiwibmFtZSI6ImFjYWx2byJ9fQ.tDpwhtZ5GTwl6ooToFXnaPm1fkmoxK4Yl67707IWBtp_pb-C3OdSf8VKoDEJy4hm22WSsCmiTY9yI6fIhP8gPQ","name":"acalvo","expireAt":1658519508}';
-        $jwt = \Token::fromBearer($authHeader)->jwt;
-        
+        //$authHeader = 'Bearer {"message":"Successful","jwt":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJET0NLRVJfUEhQXzEiLCJhdWQiOiJUSEVfQVVESUVOQ0UiLCJpYXQiOjE2NTg1MTU5MDgsIm5iZiI6MTY1ODUxNjAwOCwiZXhwIjoxNjU4NTE5NTA4LCJkYXRhIjp7ImlkIjoiNjJkN2VhYjU1OTdmMThmODE0N2JiMGE4IiwibmFtZSI6ImFjYWx2byJ9fQ.tDpwhtZ5GTwl6ooToFXnaPm1fkmoxK4Yl67707IWBtp_pb-C3OdSf8VKoDEJy4hm22WSsCmiTY9yI6fIhP8gPQ","name":"acalvo","expireAt":1658519508}';        
+        $dades = \Token::fromBearer($authHeader);
+        $jwt = $dades->jwt;
+        $this->login->setName($dades->name);
         
         if($jwt){
         
             try {
                 $decoded = \Firebase\JWT\JWT::decode($jwt,  new \Firebase\JWT\Key($secret_key, 'HS512'));
-    
+                //if (!$this->login->sameName($decoded->data->name)) return null;
+
                 // Access is granted. Add code of the operation here 
     
                 return json_encode(array(
+                    "name" => $this->login->getName(),
                     "message" => "Access granted:",
                     "error" => "No error"
                 ));
