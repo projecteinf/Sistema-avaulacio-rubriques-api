@@ -7,6 +7,7 @@ require_once $_ENV["APP_ROOT"]."/app/model/Entities/implementacio/Login.php";
 require_once $_ENV["APP_ROOT"]."/app/model/PersistenceLayer/implementacio/MongoDb.php";
 require_once $_ENV["APP_ROOT"]."/app/Utilities/Token.php";
 require_once $_ENV["APP_ROOT"]."/app/Utilities/Params.php";
+require_once $_ENV["APP_ROOT"]."/app/Utilities/Utilities.php";
 require_once $_ENV["APP_ROOT"]."/vendor/php-jwt/JWT.php";
 require_once $_ENV["APP_ROOT"]."/vendor/php-jwt/Key.php";
 require_once $_ENV["APP_ROOT"]."/vendor/php-jwt/ExpiredException.php";
@@ -45,8 +46,8 @@ class LoginController extends Controller
 
     private function generarJWT() {  // https://www.techiediaries.com/php-jwt-authentication-tutorial/
         $data = \Token::jwt(\Params::SECRET_KEY,\Params::ISSUER_CLAIM,\Params::AUDIENCE_CLAIM);
-        $data->id="1";
-        $data->name="acalvo";
+        $data->id=\Utilities::guidv4();
+        $data->name=$this->login->getName();
         
         $token = $this->inicialitzarToken($data);
 

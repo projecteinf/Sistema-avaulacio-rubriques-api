@@ -9,6 +9,7 @@
 
         public function setName($name) { $this->name = $name;}
         public function setPassword($password) { $this->password = $password;}
+        public function getName() { return $this->name; }
 
         public function  autentificar($con) {
             $filter = ['user' => $this->name,'password' => $this->password];
