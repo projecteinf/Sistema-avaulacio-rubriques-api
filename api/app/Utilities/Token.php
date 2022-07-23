@@ -14,15 +14,14 @@ class Token {
 
     }
 
-    public static function jwt($secret_key,$issuer_claim,$audience_claim,$id) {
+    public static function jwt($secret_key,$issuer_claim,$audience_claim) {
         $instance = new self();
         $instance->secret_key = $secret_key;
         $instance->issuer_claim = $issuer_claim;
         $instance->audience_claim = $audience_claim;
         $instance->issuedat_claim = time();
-        $instance->notbefore_claim = $instance->issuedat_claim + 100;
+        $instance->notbefore_claim = $instance->issuedat_claim;
         $instance->expire_claim = $instance->issuedat_claim + 3600;
-        $instance->id=$id;
         return $instance;
     }
 

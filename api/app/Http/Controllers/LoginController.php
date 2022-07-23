@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 require_once $_ENV["APP_ROOT"]."/app/model/Entities/implementacio/Login.php";
 require_once $_ENV["APP_ROOT"]."/app/model/PersistenceLayer/implementacio/MongoDb.php";
 require_once $_ENV["APP_ROOT"]."/app/Utilities/Token.php";
+require_once $_ENV["APP_ROOT"]."/app/Utilities/Params.php";
 require_once $_ENV["APP_ROOT"]."/vendor/php-jwt/JWT.php";
 require_once $_ENV["APP_ROOT"]."/vendor/php-jwt/Key.php";
 require_once $_ENV["APP_ROOT"]."/vendor/php-jwt/ExpiredException.php";
@@ -43,7 +44,8 @@ class LoginController extends Controller
     }
 
     private function generarJWT() {  // https://www.techiediaries.com/php-jwt-authentication-tutorial/
-        $data = \Token::jwt("YOUR_SECRET_KEY","DOCKER_PHP_1","THE_AUDIENCE","62d7eab5597f18f8147bb0a8");
+        $data = \Token::jwt(\Params::SECRET_KEY,\Params::ISSUER_CLAIM,\Params::AUDIENCE_CLAIM);
+        $data->id="1";
         $data->name="acalvo";
         
         $token = $this->inicialitzarToken($data);
@@ -61,9 +63,9 @@ class LoginController extends Controller
     }
 
     private function validarUsuari() {
-        $secret_key = "YOUR_SECRET_KEY";
-        //$authHeader = 'Bearer {"message":"Successful","jwt":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJET0NLRVJfUEhQXzEiLCJhdWQiOiJUSEVfQVVESUVOQ0UiLCJpYXQiOjE2NTg1MTU5MDgsIm5iZiI6MTY1ODUxNjAwOCwiZXhwIjoxNjU4NTE5NTA4LCJkYXRhIjp7ImlkIjoiNjJkN2VhYjU1OTdmMThmODE0N2JiMGE4IiwibmFtZSI6ImFjYWx2byJ9fQ.tDpwhtZ5GTwl6ooToFXnaPm1fkmoxK4Yl67707IWBtp_pb-C3OdSf8VKoDEJy4hm22WSsCmiTY9yI6fIhP8gPQ","name":"acalvo","expireAt":1658519508}';
+        $secret_key = "YOUR_SECRET_KEY";        
         $authHeader = $_SERVER['HTTP_AUTHORIZATION'];        
+        //$authHeader = 'Bearer {"message":"Successful","jwt":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJET0NLRVJfUEhQXzEiLCJhdWQiOiJUSEVfQVVESUVOQ0UiLCJpYXQiOjE2NTg1MTU5MDgsIm5iZiI6MTY1ODUxNjAwOCwiZXhwIjoxNjU4NTE5NTA4LCJkYXRhIjp7ImlkIjoiNjJkN2VhYjU1OTdmMThmODE0N2JiMGE4IiwibmFtZSI6ImFjYWx2byJ9fQ.tDpwhtZ5GTwl6ooToFXnaPm1fkmoxK4Yl67707IWBtp_pb-C3OdSf8VKoDEJy4hm22WSsCmiTY9yI6fIhP8gPQ","name":"acalvo","expireAt":1658519508}';
         $jwt = \Token::fromBearer($authHeader)->jwt;
         
         

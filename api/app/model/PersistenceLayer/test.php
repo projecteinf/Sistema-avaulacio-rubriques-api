@@ -4,6 +4,7 @@
     // require_once __DIR__."/implementacio/MongoDb.php";
     require_once __DIR__."/../../../vendor/php-jwt/JWT.php";
     require_once __DIR__."/../../Utilities/Token.php";
+    require_once __DIR__."/../../Utilities/Params.php";
 
     $con = new \MongoDB\Driver\Manager("mongodb://professor:p@docker_mongo_1:27017/admin");
     if($con) {
@@ -16,10 +17,9 @@
             //echo count($rows->toArray());
             foreach ($rows as $row) {
                  var_dump($row);
-                 $data = new \Token("YOUR_SECRET_KEY","DOCKER_PHP_1","THE_AUDIENCE","62d7eab5597f18f8147bb0a8");
-                 $data->firstname="alex";
-                 $data->lastname="calvo";
-                 $data->email="acalvo@boscdelacoma.cat";
+                 $data = \Token::jwt(\Params::SECRET_KEY,\Params::ISSUER_CLAIM,\Params::AUDIENCE_CLAIM);
+                 $data->id="1";
+                 $data->name="acalvo";
 
                  $token = array(
                      "iss" => $data->issuer_claim,
@@ -29,19 +29,17 @@
                      "exp" => $data->expire_claim,
                      "data" => array(
                          "id" => $data->id,
-                         "firstname" => $data->firstname,
-                         "lastname" => $data->lastname,
-                         "email" => $data->email
+                         "name" => $data->name,
                  ));
          
-                 http_response_code(200);
+                // http_response_code(200);
          
                  $jwt = \Firebase\JWT\JWT::encode($token, $data->secret_key, 'HS512');
                  echo json_encode(
                      array(
                          "message" => "Successful login.",
                          "jwt" => $jwt,
-                         "email" => $data->email,
+                         "name" => $data->name,
                          "expireAt" => $data->expire_claim
                      ));
 

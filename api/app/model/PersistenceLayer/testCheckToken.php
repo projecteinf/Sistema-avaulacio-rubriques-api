@@ -9,7 +9,7 @@
 
    
     $secret_key = "YOUR_SECRET_KEY";
-    $authHeader = 'Bearer {"message":"Successful","jwt":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJET0NLRVJfUEhQXzEiLCJhdWQiOiJUSEVfQVVESUVOQ0UiLCJpYXQiOjE2NTg1MTU5MDgsIm5iZiI6MTY1ODUxNjAwOCwiZXhwIjoxNjU4NTE5NTA4LCJkYXRhIjp7ImlkIjoiNjJkN2VhYjU1OTdmMThmODE0N2JiMGE4IiwibmFtZSI6ImFjYWx2byJ9fQ.tDpwhtZ5GTwl6ooToFXnaPm1fkmoxK4Yl67707IWBtp_pb-C3OdSf8VKoDEJy4hm22WSsCmiTY9yI6fIhP8gPQ","name":"acalvo","expireAt":1658519508}';
+    $authHeader = 'Bearer {"message":"Successful","jwt":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJET0NLRVJfUEhQXzEiLCJhdWQiOiJUSEVfQVVESUVOQ0UiLCJpYXQiOjE2NTg1NjgzOTAsIm5iZiI6MTY1ODU2ODQ5MCwiZXhwIjoxNjU4NTcxOTkwLCJkYXRhIjp7ImlkIjoiMSIsIm5hbWUiOiJhY2Fsdm8ifX0.0GSLdXhIQPxjrTOQxCoj3x6e294Zg3PGoWElYt2NzJcyALj8iPw_zFxWfWnvqJWbGKMmC39emn4PzOMIWHHyJA","name":"acalvo","expireAt":1658571990}';
     $jwt = \Token::fromBearer($authHeader)->jwt;
     echo $jwt;
     //$jwt = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJET0NLRVJfUEhQXzEiLCJhdWQiOiJUSEVfQVVESUVOQ0UiLCJpYXQiOjE2NTg1MTM0MDIsIm5iZiI6MTY1ODUxNDQwMiwiZXhwIjoxNjU4NTE3MDAyLCJkYXRhIjp7ImlkIjoiNjJkN2VhYjU1OTdmMThmODE0N2JiMGE4IiwibmFtZSI6ImFjYWx2byJ9fQ.DlzFyI8iNh1fCnpLbMg71TmEEstzjsg3kB6Y3HHr2Ueye-hjRDTPb9aE0qD8zz5_eqCBxS7RNkW1JBIs8mAOYw";
