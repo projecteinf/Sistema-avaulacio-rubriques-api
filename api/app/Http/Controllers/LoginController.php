@@ -80,6 +80,7 @@ class LoginController extends Controller
                 // Access is granted. Add code of the operation here 
     
                 return json_encode(array(
+                    "desencriptat" => $decoded,
                     "name" => $this->login->getName(),
                     "message" => "Access granted:",
                     "error" => "No error"
