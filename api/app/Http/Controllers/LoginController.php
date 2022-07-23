@@ -90,7 +90,7 @@ class LoginController extends Controller
     
                 http_response_code(401);
         
-                echo json_encode(array(
+                return json_encode(array(
                     "message" => "Access denied.",
                     "error" => $e->getMessage()
                 ));
