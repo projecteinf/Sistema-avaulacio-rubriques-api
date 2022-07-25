@@ -26,13 +26,3 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->post('login', [ 'uses' => 'LoginController@login' ]);
 }
 );
-
-/* 
-$router->get('/api/login', [
-    'uses' => 'LoginController@index'
-]);
-
-$router->post('/api/login', [
-    'uses' => 'LoginController@store'
-]); */
-
