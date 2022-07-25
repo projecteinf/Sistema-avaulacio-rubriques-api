@@ -63,9 +63,11 @@ class LoginController extends Controller
             ));
     }
 
+
     private function validarUsuari() {
         $secret_key = "YOUR_SECRET_KEY";        
         $authHeader = $_SERVER['HTTP_AUTHORIZATION'];        
+        $newJWT = "";
         $dades = \Token::fromBearer($authHeader);
         $jwt = $dades->jwt;
                 
@@ -73,12 +75,14 @@ class LoginController extends Controller
             $this->login->setName($dades->name);
             try {
                 $decoded = \Firebase\JWT\JWT::decode($jwt,  new \Firebase\JWT\Key($secret_key, 'HS512'));
-                if (!$this->login->sameName($decoded->data->name)) throw "Dades no vàlides";
-                $newJWT = $this->generarJWT();
+
                 // Access is granted. Add code of the operation here 
-    
+                if (!$this->login->sameName($decoded->data->name)) throw "Dades no vàlides";
+                //if (\Utilities::prorrogar($decoded->iat,\Params::PRORROGA_TOKEN)) $newJWT = json_decode($this->generarJWT());
+                $decoded = \Utilities::prorrogar($decoded->iat,\Params::PRORROGA_TOKEN/100*\Params::SEGONS_DURADA_TOKEN);
                 return json_encode(array(
-                    "new" => json_decode($newJWT),
+                    "decoded" => $decoded,
+                    "new" => $newJWT,
                     "name" => $this->login->getName(),
                     "message" => "Access granted:",
                     "error" => "No error"

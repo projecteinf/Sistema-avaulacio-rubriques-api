@@ -13,4 +13,15 @@ class Utilities {
         // Output the 36 character UUID.
         return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
     }
+    
+    /*
+        $inici: moment en què s'ha generat l'objecte
+        $pcTemps: % de temps màxim amb el qual no cal fer pròrroga
+        
+        //  ARA>=INICI+DURADA
+    */
+    static function prorrogar($inici,$durada) {
+        $ara = (new DateTime())->getTimestamp(); //$inici - $dada
+        return $ara>=$inici+$durada;
+    }
 }
