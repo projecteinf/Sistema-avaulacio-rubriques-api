@@ -22,7 +22,7 @@ $router->get('/', function () use ($router) {
 
 $router->group(['prefix' => 'api'], function () use ($router) {
     // api/login
-    $router->get('login', [ 'uses' => 'LoginController@index' ]);
+    $router->get('login', [ 'uses' => 'LoginController@verificarToken' ]);
     $router->post('login', [ 'uses' => 'LoginController@login' ]);
 }
 );

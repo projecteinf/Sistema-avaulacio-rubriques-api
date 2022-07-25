@@ -98,7 +98,7 @@ class LoginController extends Controller
         } 
     }
 
-    public function index() {
+    public function verificarToken() {
         return ['response' =>
             [
                 $this->validarUsuari()
