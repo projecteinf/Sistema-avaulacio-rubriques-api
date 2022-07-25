@@ -22,6 +22,7 @@ class Utilities {
     */
     static function prorrogar($inici,$durada) {
         $ara = (new DateTime())->getTimestamp(); //$inici - $dada
-        return $ara>=$inici+$durada;
+        $maxim = $inici+$durada;
+        return $ara>=$maxim;
     }
 }

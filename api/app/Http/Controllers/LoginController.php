@@ -78,8 +78,8 @@ class LoginController extends Controller
 
                 // Access is granted. Add code of the operation here 
                 if (!$this->login->sameName($decoded->data->name)) throw "Dades no vàlides";
-                if (\Utilities::prorrogar($decoded->iat,\Params::PRORROGA_TOKEN)) $newJWT = json_decode($this->generarJWT());
-                
+                if (\Utilities::prorrogar($decoded->iat,\Params::PRORROGA_TOKEN/100*\Params::SEGONS_DURADA_TOKEN)) $newJWT = json_decode($this->generarJWT());
+                //$decoded = \Utilities::prorrogar($decoded->iat,\Params::PRORROGA_TOKEN/100*\Params::SEGONS_DURADA_TOKEN);
                 return json_encode(array(
                     "decoded" => $decoded,
                     "new" => $newJWT,
