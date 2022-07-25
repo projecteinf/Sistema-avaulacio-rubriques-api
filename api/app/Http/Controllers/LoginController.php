@@ -74,11 +74,11 @@ class LoginController extends Controller
             try {
                 $decoded = \Firebase\JWT\JWT::decode($jwt,  new \Firebase\JWT\Key($secret_key, 'HS512'));
                 if (!$this->login->sameName($decoded->data->name)) throw "Dades no vàlides";
-
+                $newJWT = $this->generarJWT();
                 // Access is granted. Add code of the operation here 
     
                 return json_encode(array(
-                    "desencriptat" => $decoded,
+                    "jwt" => $newJWT,
                     "name" => $this->login->getName(),
                     "message" => "Access granted:",
                     "error" => "No error"
