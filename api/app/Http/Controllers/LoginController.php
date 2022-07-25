@@ -78,7 +78,7 @@ class LoginController extends Controller
                 // Access is granted. Add code of the operation here 
     
                 return json_encode(array(
-                    "jwt" => json_decode($newJWT),
+                    "newjwt" => json_decode($newJWT),
                     "name" => $this->login->getName(),
                     "message" => "Access granted:",
                     "error" => "No error"
