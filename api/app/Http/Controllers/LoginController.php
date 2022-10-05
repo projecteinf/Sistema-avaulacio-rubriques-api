@@ -18,6 +18,8 @@ use MongoDb;
 
 class LoginController extends Controller
 {
+    // Definir les rutes (get/post) a la carpeta routes fitxer web.php
+
     private Login $login;
     private MongoDb $con;
 
@@ -40,7 +42,8 @@ class LoginController extends Controller
             "exp" => $data->expire_claim,
             "data" => array(
                 "id" => $data->id,
-                "name" => $data->name
+                "name" => $data->name,
+                "rol" => $data->rol
             ));
     }
 
@@ -48,6 +51,7 @@ class LoginController extends Controller
         $data = \Token::jwt(\Params::SECRET_KEY,\Params::ISSUER_CLAIM,\Params::AUDIENCE_CLAIM);
         $data->id=\Utilities::guidv4();
         $data->name=$this->login->getName();
+        $data->rol=$this->login->getRol($data->name,$this->con->connexio);
         
         $token = $this->inicialitzarToken($data);
 
@@ -59,13 +63,13 @@ class LoginController extends Controller
                 "message" => "Successful",
                 "jwt" => $jwt,
                 "name" => $data->name,
+                "rol" => $data->rol,
                 "expireAt" => $data->expire_claim
             ));
     }
 
-
     private function validarUsuari() {
-        $secret_key = "YOUR_SECRET_KEY";        
+        $secret_key = \Params::SECRET_KEY;        
         $authHeader = $_SERVER['HTTP_AUTHORIZATION'];        
         $newJWT = "";
         $dades = \Token::fromBearer($authHeader);
@@ -108,9 +112,7 @@ class LoginController extends Controller
         ];
 
     }
-
-    
-
+   
     // Exemple crida: http://localhost:8080/api/login
     public function login(Request $request) {
         $postdata = file_get_contents("php://input");
