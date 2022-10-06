@@ -116,6 +116,7 @@ class LoginController extends Controller
     public function getStudents() {
         return $this->login->getStudents($this->con->connexio);
     }
+    
     // Exemple crida: http://localhost:8080/api/login
     public function login(Request $request) {
         $postdata = file_get_contents("php://input");
