@@ -6,8 +6,7 @@
     class Rubrica implements IRubrica {
         
         public function getRubrica($con,$curs) { 
-            $cursCodi = explode("=",$curs)[1];
-            $filter = ['curs'=>$cursCodi];
+            $filter = ['curs'=>$curs];
             $options = [];
             $query = new \MongoDB\Driver\Query($filter,$options);
            
