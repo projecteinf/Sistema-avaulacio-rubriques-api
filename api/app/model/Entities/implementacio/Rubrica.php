@@ -8,8 +8,6 @@
         public function getRubrica($con,$curs) { 
             $cursCodi = explode("=",$curs)[1];
             $filter = ['curs'=>$cursCodi];
-            var_dump($curs); echo "<br>";
-            var_dump($filter);
             $options = [];
             $query = new \MongoDB\Driver\Query($filter,$options);
            
