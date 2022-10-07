@@ -43,7 +43,8 @@ class LoginController extends Controller
             "data" => array(
                 "id" => $data->id,
                 "name" => $data->name,
-                "rol" => $data->rol
+                "rol" => $data->rol,
+                "cursos" => $data->cursos
             ));
     }
 
