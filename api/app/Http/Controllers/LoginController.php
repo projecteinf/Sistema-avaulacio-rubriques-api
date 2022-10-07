@@ -52,7 +52,7 @@ class LoginController extends Controller
         $data->id=\Utilities::guidv4();
         $data->name=$this->login->getName();
         $data->rol=$this->login->getRol($data->name,$this->con->connexio);
-        
+        $data->cursos=$this->login->getCursos($data->name,$this->con->connexio);
         $token = $this->inicialitzarToken($data);
 
         http_response_code(200);
@@ -64,6 +64,7 @@ class LoginController extends Controller
                 "jwt" => $jwt,
                 "name" => $data->name,
                 "rol" => $data->rol,
+                "cursos" => $data->cursos,
                 "expireAt" => $data->expire_claim
             ));
     }
@@ -116,7 +117,7 @@ class LoginController extends Controller
     public function getStudents() {
         return $this->login->getStudents($this->con->connexio);
     }
-    
+
     // Exemple crida: http://localhost:8080/api/login
     public function login(Request $request) {
         $postdata = file_get_contents("php://input");
