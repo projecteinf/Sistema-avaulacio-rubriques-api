@@ -16,6 +16,13 @@ require_once $_ENV["APP_ROOT"]."/vendor/php-jwt/BeforeValidException.php";
 
 use MongoDb;
 
+
+/*
+    Per activar/desactivar debug api/vendor/laravel/lumen-framework/config/app.php 
+    'debug' => (bool) env('APP_DEBUG', false) // Desactivar
+    'debug' => (bool) env('APP_DEBUG', true) // Activar
+*/
+
 class LoginController extends Controller
 {
     // Definir les rutes (get/post) a la carpeta routes fitxer web.php
@@ -76,7 +83,7 @@ class LoginController extends Controller
         $newJWT = "";
         $dades = \Token::fromBearer($authHeader);
         $jwt = $dades->jwt;
-                
+       
         if($jwt){
             $this->login->setName($dades->name);
             try {
