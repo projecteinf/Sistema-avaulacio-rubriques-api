@@ -23,4 +23,11 @@ class RubricaController extends Controller
     public function getRubrica($curs) {
         return $this->rubrica->getRubrica($this->con->connexio,$curs);
     }
+
+    public function login(Request $request) {
+        $postdata = file_get_contents("php://input");
+        
+        var_dump($postdata);
+        //if ($this->login->autentificar($this->con->connexio)==1) return ['response' => [$this->generarJWT()]];
+    }
 }
