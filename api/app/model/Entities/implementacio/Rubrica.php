@@ -14,6 +14,17 @@
             return $rows->toArray();
         }
 
+        public function save($con,$data) {
+            $info = new \MongoDB\Driver\BulkWrite();
+            $info->insert(json_decode($data));
+
+            $writeConcern = new \MongoDB\Driver\WriteConcern(\MongoDB\Driver\WriteConcern::MAJORITY, 100);
+            $result = $con->executeBulkWrite('rubrica.gbarris',$info,$writeConcern);
+            return $result;
+        }
+
+
+
         public static function minimitzar($jsonData,$jsonKey) {
             //var_dump($jsonKey);
             $capacitatsClau = json_decode($jsonData)->capacitatsClau;

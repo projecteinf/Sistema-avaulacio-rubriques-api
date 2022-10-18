@@ -28,7 +28,9 @@ class RubricaController extends Controller
         $postdata = file_get_contents("php://input");
         $postkey = json_decode($postdata)->key;
         $postdata = json_decode($postdata)->data;        
-        return Rubrica::minimitzar($postdata,$postkey);
+        //$data = Rubrica::minimitzar($postdata,$postkey);
+        
+        return $this->rubrica->save($this->con->connexio,$postdata);
         
     }
 }
