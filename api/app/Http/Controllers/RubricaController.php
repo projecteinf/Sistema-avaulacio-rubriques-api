@@ -30,7 +30,7 @@ class RubricaController extends Controller
         $postdata = json_decode($postdata)->data;        
         //$data = Rubrica::minimitzar($postdata,$postkey);
         
-        return $this->rubrica->save($this->con->connexio,$postdata);
+        return $this->rubrica->save($this->con->connexio,$postdata,$postkey);
         
     }
 }

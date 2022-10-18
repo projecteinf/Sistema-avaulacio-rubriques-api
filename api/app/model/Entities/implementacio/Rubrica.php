@@ -14,12 +14,13 @@
             return $rows->toArray();
         }
 
-        public function save($con,$data) {
+        public function save($con,$data,$key) {
+            $key = json_decode($key)->key;
             $info = new \MongoDB\Driver\BulkWrite();
             $info->insert(json_decode($data));
 
             $writeConcern = new \MongoDB\Driver\WriteConcern(\MongoDB\Driver\WriteConcern::MAJORITY, 100);
-            $result = $con->executeBulkWrite('rubrica.gbarris',$info,$writeConcern);
+            $result = $con->executeBulkWrite("rubrica.$key",$info,$writeConcern);
             return $result;
         }
 
