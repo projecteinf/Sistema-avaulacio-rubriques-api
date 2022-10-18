@@ -21,7 +21,7 @@
 
             $writeConcern = new \MongoDB\Driver\WriteConcern(\MongoDB\Driver\WriteConcern::MAJORITY, 100);
             $result = $con->executeBulkWrite("rubrica.$key",$info,$writeConcern);
-            return $result;
+            return [$result];
         }
 
 
