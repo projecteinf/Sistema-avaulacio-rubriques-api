@@ -14,8 +14,20 @@
             return $rows->toArray();
         }
 
+
+        public function getRubricaPuntuada($con,$curs,$usuari) { 
+            $filter = [];
+            $options = [];
+            $query = new \MongoDB\Driver\Query($filter,$options);
+           
+            $rows = $con->executeQuery("rubrica.${usuari}${curs}",$query);            
+            return $rows->toArray();
+        }
+
+
         public function save($con,$data,$key) {
             $key = json_decode($key)->key;
+            $this->removeCollection($con,$key);
             $info = new \MongoDB\Driver\BulkWrite();
             $info->insert(json_decode($data));
 
@@ -24,7 +36,9 @@
             return [$result];
         }
 
-
+        private function removeCollection($con,$key) {
+            $con->executeCommand('rubrica',new \MongoDB\Driver\Command(["drop" => "$key"]));
+        }
 
         public static function minimitzar($jsonData,$jsonKey) {
             //var_dump($jsonKey);

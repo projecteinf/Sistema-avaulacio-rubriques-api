@@ -24,6 +24,10 @@ class RubricaController extends Controller
         return $this->rubrica->getRubrica($this->con->connexio,$curs);
     }
 
+    public function getRubricaPuntuada($curs,$usuari) {
+        return $this->rubrica->getRubricaPuntuada($this->con->connexio,$curs,$usuari);
+    }
+
     public function saveRubrica(Request $request) {
         $postdata = file_get_contents("php://input");
         $postkey = json_decode($postdata)->key;
