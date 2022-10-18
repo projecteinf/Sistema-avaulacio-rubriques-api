@@ -24,10 +24,11 @@ class RubricaController extends Controller
         return $this->rubrica->getRubrica($this->con->connexio,$curs);
     }
 
-    public function login(Request $request) {
+    public function saveRubrica(Request $request) {
         $postdata = file_get_contents("php://input");
+        $postkey = json_decode($postdata)->key;
+        $postdata = json_decode($postdata)->data;        
+        return Rubrica::minimitzar($postdata,$postkey);
         
-        var_dump($postdata);
-        //if ($this->login->autentificar($this->con->connexio)==1) return ['response' => [$this->generarJWT()]];
     }
 }

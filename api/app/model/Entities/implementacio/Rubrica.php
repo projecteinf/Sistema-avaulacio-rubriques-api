@@ -14,4 +14,26 @@
             return $rows->toArray();
         }
 
+        public static function minimitzar($jsonData,$jsonKey) {
+            //var_dump($jsonKey);
+            $capacitatsClau = json_decode($jsonData)->capacitatsClau;
+            $key = json_decode($jsonKey)->key;
+            gettype($key);
+            $valCC = array();
+
+             foreach($capacitatsClau as $index => $capacitatClau) {
+                $nota = null;
+                if (isset($capacitatClau->nota)) $nota = $capacitatClau->nota;
+                $obj = (object) [
+                    'nom' => $capacitatClau->nom,
+                    'nota' => $nota 
+                ];
+                $valCC[$index]=$obj;
+            }  
+            
+            $result = '{key:'.$jsonKey.",valoracio:".json_encode($valCC) .'}';
+            return ["response" => $result];
+            
+        }
+
     }
