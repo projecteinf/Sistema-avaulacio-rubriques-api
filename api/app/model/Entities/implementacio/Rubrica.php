@@ -27,13 +27,19 @@
 
         public function save($con,$data,$key) {
             $key = json_decode($key)->key;
-            $this->removeCollection($con,$key);
-            $info = new \MongoDB\Driver\BulkWrite();
-            $info->insert(json_decode($data));
-
-            $writeConcern = new \MongoDB\Driver\WriteConcern(\MongoDB\Driver\WriteConcern::MAJORITY, 100);
-            $result = $con->executeBulkWrite("rubrica.$key",$info,$writeConcern);
-            return [$result];
+            try {
+                $this->removeCollection($con,$key);
+            } catch (Exception $e) {
+                
+                
+            } finally {
+                $info = new \MongoDB\Driver\BulkWrite();
+                $info->insert(json_decode($data));
+    
+                $writeConcern = new \MongoDB\Driver\WriteConcern(\MongoDB\Driver\WriteConcern::MAJORITY, 100);
+                $result = $con->executeBulkWrite("rubrica.$key",$info,$writeConcern);
+                return [$result];
+            }
         }
 
         private function removeCollection($con,$key) {
