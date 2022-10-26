@@ -16,6 +16,7 @@ require_once $_ENV["APP_ROOT"]."/vendor/php-jwt/BeforeValidException.php";
 
 use MongoDb;
 
+
 /*
     Per activar/desactivar debug api/vendor/laravel/lumen-framework/config/app.php 
     'debug' => (bool) env('APP_DEBUG', false) // Desactivar
@@ -50,8 +51,7 @@ class LoginController extends Controller
                 "id" => $data->id,
                 "name" => $data->name,
                 "rol" => $data->rol,
-                "cursos" => $data->cursos,
-                "displayName" => $data->displayName,
+                "cursos" => $data->cursos
             ));
     }
 
@@ -124,6 +124,10 @@ class LoginController extends Controller
    
     public function getStudents() {
         return $this->login->getStudents($this->con->connexio);
+    }
+
+    public function getStudent($user) {
+        return $this->login->getStudent($this->con->connexio,$user);
     }
 
     // Exemple crida: http://localhost:8080/api/login
