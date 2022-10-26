@@ -31,6 +31,14 @@
             return $rows->toArray()[0]->cursos;
         }
 
+        public function get($con,$user) { 
+            $filter = ['user' => $user];
+            $options = [ 'projection' => ['password' => 0 , '_id' => 0]];
+            $query = new \MongoDB\Driver\Query($filter,$options);
+            $rows = $con->executeQuery('rubrica.usuaris',$query);
+
+            return $rows->toArray();
+        }
 
         public function getStudents($con) { 
             $filter = ['rol' => "student"];

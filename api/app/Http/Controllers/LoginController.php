@@ -50,7 +50,8 @@ class LoginController extends Controller
                 "id" => $data->id,
                 "name" => $data->name,
                 "rol" => $data->rol,
-                "cursos" => $data->cursos
+                "cursos" => $data->cursos,
+                "displayName" => $data->displayName,
             ));
     }
 
@@ -58,8 +59,12 @@ class LoginController extends Controller
         $data = \Token::jwt(\Params::SECRET_KEY,\Params::ISSUER_CLAIM,\Params::AUDIENCE_CLAIM);
         $data->id=\Utilities::guidv4();
         $data->name=$this->login->getName();
-        $data->rol=$this->login->getRol($data->name,$this->con->connexio);
-        $data->cursos=$this->login->getCursos($data->name,$this->con->connexio);
+        $userData = $this->login->get($this->con->connexio,$data->name)[0];
+        $data->rol = $userData->rol;
+        $data->cursos = $userData->cursos;
+        $data->displayName = $userData->nom;
+        //$data->rol=$this->login->getRol($data->name,$this->con->connexio);
+        //$data->cursos=$this->login->getCursos($data->name,$this->con->connexio);
         $token = $this->inicialitzarToken($data);
 
         http_response_code(200);
@@ -71,6 +76,7 @@ class LoginController extends Controller
                 "jwt" => $jwt,
                 "name" => $data->name,
                 "rol" => $data->rol,
+                "displayName" => $data->displayName,
                 "cursos" => $data->cursos,
                 "expireAt" => $data->expire_claim
             ));
