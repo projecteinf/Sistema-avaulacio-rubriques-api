@@ -25,8 +25,6 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->get('login', [ 'uses' => 'LoginController@verificarToken' ]);
     $router->post('login', [ 'uses' => 'LoginController@login' ]);
     $router->get('getStudents', [ 'uses' => 'LoginController@getStudents' ]);
-    $router->get('getStudent/{user}', [ 'uses' => 'LoginController@getStudent' ]);
-    
     $router->get('getRubrica/{curs}',[ 'uses' => 'RubricaController@getRubrica']);
     $router->get('getRubricaPuntuada/{curs}/{usuari}',[ 'uses' => 'RubricaController@getRubricaPuntuada']);
     $router->post('saveRubrica', [ 'uses' => 'RubricaController@saveRubrica']);

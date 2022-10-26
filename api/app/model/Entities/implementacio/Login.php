@@ -49,15 +49,6 @@
             return $rows->toArray();
         }
 
-        public function getStudent($con,$user) { 
-            $filter = ['rol' => "student",'user' => $user];
-            $options = [ 'projection' => ['password' => 0 , '_id' => 0]];
-            $query = new \MongoDB\Driver\Query($filter,$options);
-            $rows = $con->executeQuery('rubrica.usuaris',$query);
-
-            return $rows->toArray();
-        }
-
         public function sameName($name) { return $this->name == $name;}
 
         public function  autentificar($con) {
