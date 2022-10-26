@@ -16,7 +16,6 @@ require_once $_ENV["APP_ROOT"]."/vendor/php-jwt/BeforeValidException.php";
 
 use MongoDb;
 
-
 /*
     Per activar/desactivar debug api/vendor/laravel/lumen-framework/config/app.php 
     'debug' => (bool) env('APP_DEBUG', false) // Desactivar
