@@ -53,12 +53,15 @@
         public function sameName($name) { return $this->name == $name;}
 
         public function  autentificar($con) {
-            $filter = ['user' => $this->name,'password' => $this->password];
+            $filter = ['user' => $this->name];
             $options = [];
             $query = new \MongoDB\Driver\Query($filter,$options);
             $rows = $con->executeQuery('rubrica.usuaris',$query);
 
-            return count($rows->toArray());
+            if (password_verify($this->password,$rows->toArray()[0]->password)) return 1;
+            else return 0;
+
+            //return count($rows->toArray());
         }
 
         public function toString() {
