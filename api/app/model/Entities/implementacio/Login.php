@@ -10,9 +10,13 @@
         private $cursos = array();
 
         public function setName($name) { $this->name = $name;}
-        public function setPassword($password) { $this->password = $password;}
+        public function setPassword($password) { 
+            $this->password = $password;
+        }
 
         public function getName() { return $this->name; }
+        public function getPassword() { return $this->password; }
+
         public function getRol($name,$con) { 
             $filter = ['user' => $this->name];
             $options = [];
@@ -50,6 +54,15 @@
             return $rows->toArray();
         }
 
+        public function update($con) { 
+            $bulk = new \MongoDB\Driver\BulkWrite;
+            //$bulk->delete(['user'->$this->name]);
+            
+
+            //return $rows->toArray();
+        }
+
+
         public function sameName($name) { return $this->name == $name;}
 
         public function  autentificar($con) {
@@ -58,8 +71,11 @@
             $query = new \MongoDB\Driver\Query($filter,$options);
             $rows = $con->executeQuery('rubrica.usuaris',$query);
 
-            if (password_verify($this->password,$rows->toArray()[0]->password)) return 1;
-            else return 0;
+            if (password_verify($this->password,$rows->toArray()[0]->password)) 
+                return 1;
+            else {
+                return 0;
+            }
 
             //return count($rows->toArray());
         }

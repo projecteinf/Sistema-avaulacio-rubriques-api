@@ -130,11 +130,19 @@ class LoginController extends Controller
         return $this->login->getStudent($this->con->connexio,$user);
     }
 
+    public function update(Request $request) {
+        $postdata = file_get_contents("php://input");
+        $this->inicialitzarLogin(json_decode($postdata,false));
+
+        return $this->login->update($this->con->connexio);
+    }
+ 
     // Exemple crida: http://localhost:8080/api/login
     public function login(Request $request) {
         $postdata = file_get_contents("php://input");
         
         $this->inicialitzarLogin(json_decode($postdata,false));
         if ($this->login->autentificar($this->con->connexio)==1) return ['response' => [$this->generarJWT()]];
+
     }
 }
