@@ -132,9 +132,9 @@ class LoginController extends Controller
 
     public function update(Request $request) {
         $postdata = file_get_contents("php://input");
-        $this->inicialitzarLogin(json_decode($postdata,false));
+        //$this->inicialitzarLogin(json_decode($postdata,false));
 
-        return $this->login->update($this->con->connexio);
+        return $this->login->update($this->con->connexio,$postdata);
     }
  
     // Exemple crida: http://localhost:8080/api/login

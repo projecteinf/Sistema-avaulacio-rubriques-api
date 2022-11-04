@@ -54,12 +54,12 @@
             return $rows->toArray();
         }
 
-        public function update($con) { 
-            $bulk = new \MongoDB\Driver\BulkWrite;
-            //$bulk->delete(['user'->$this->name]);
-            
-
-            //return $rows->toArray();
+        public function update($con,$userData) { 
+            $bulk = new \MongoDB\Driver\BulkWrite(['ordered'=>true]);
+            $user = json_decode($userData,false);
+            $bulk->update(['user'=>$user->nom],['$set' => ['password'=>$user->password]]);
+            $result = $con->executeBulkWrite('rubrica.usuaris', $bulk);
+            return [$result];
         }
 
 
