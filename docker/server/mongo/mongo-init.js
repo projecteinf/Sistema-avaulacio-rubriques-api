@@ -1,4 +1,4 @@
-db.auth('root', 'a');
+/* db.auth('root', 'a');
 
 db = db.getSiblingDB('rubrica');
 db.createCollection('usuaris');
@@ -30,6 +30,6 @@ db.createUser({
   pwd: "a",
   roles: [{role: "read", db: "rubrica"}]
 });
-
+ */
 
 
