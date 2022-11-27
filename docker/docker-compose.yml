@@ -29,8 +29,8 @@ services:
     command: --auth
     environment:
       MONGO_INITDB_DATABASE: rubrica
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: a
+#      MONGO_INITDB_ROOT_USERNAME: root
+#      MONGO_INITDB_ROOT_PASSWORD: a
     ports:
       - "27017:27017"
     volumes:
